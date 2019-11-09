@@ -1,4 +1,7 @@
+import java.util.*;
+import java.io.*;
 
-public class Deck {
+public class Deck extends Card
+{
 
 }
