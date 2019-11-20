@@ -4,16 +4,18 @@ import java.io.*;
 public class Player extends Deck
 {
 	int playerID;				
-	int score;
+	int playerScore;
 	String playerName;
-	ArrayList<Deck> hand;
+	Deck hand;
+	Scanner playerInput;
 	
 	public Player() {
 		super();
-		playerID = 0;
-		score = 0;
+		playerID = -1;
+		playerScore = 0;
 		playerName = new String();
-		hand = new ArrayList<Deck>();
+		hand = new Deck();
+		playerInput = new Scanner(System.in);
 	}
 
 	public int getPlayerID() 
@@ -26,14 +28,14 @@ public class Player extends Deck
 		this.playerID = playerID;
 	}
 
-	public int getScore() 
+	public int getPlayerScore() 
 	{
-		return score;
+		return playerScore;
 	}
 
 	public void setScore(int score) 
 	{
-		this.score = score;
+		this.playerScore = score;
 	}
 
 	public String getPlayerName() 
@@ -45,4 +47,12 @@ public class Player extends Deck
 	{
 		this.playerName = playerName;
 	}	
+	
+	public void printPlayerInfo(int playerID)
+	{
+		System.out.println("\tPlayer ID: " + (this.playerID + 1));
+		System.out.println("\tPlayer Name: " + this.playerName);
+		System.out.println("\tPlater Score: " + this.playerScore);
+		this.printDeck();
+	}
 }

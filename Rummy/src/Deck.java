@@ -2,60 +2,54 @@ import java.util.*;
 import java.io.*;
 
 public class Deck {
-	Stack deck = new Stack();
+	Stack<Card> deck = new Stack<Card>();
 
-	Card[] deckArr;
-
-	public Deck() {
-
-		deckArr = new Card[52];
-
-		int index = 0;
-		for (int suit = 0; suit <= 3; suit++) {
-			for (int rank = 1; rank <= 13; rank++) {
-				deckArr[index] = new Card(rank, suit);
-				index++;
-			}
-		}
-
-//********************STACK DECK************************
-//		int index = 0;
-//		for (int suit = 0; suit <= 3; suit++) {
-//		    for (int rank = 1; rank <= 13; rank++) {
-//		        deck.push(new Card(rank, suit));
-//		        index++;
-//		    }
-//		}
+	public Deck() 
+	{
+		this.createDeck();
+	}
+	
+	public Deck(int numberOfPlayers)
+	{
+		
 	}
 
-//    public String toString()
-//    {
-// 	 String s = "";
-// 	 int k;
-// 	 k = 0;
-// 	 for ( int i = 0; i < 4; i++ )
-// 	 {
-// 	    for ( int j = 1; j <= 13; j++ ) {
-// 	    	s += (deck.peek() + " ");
-// 	    	s += "\n";
-// 	    }
-// 	    s += "\n";
-// 	 }
-// 	 return ( s );
-//    }
+	public Stack<Card> createDeck() {
+		ArrayList<Card> deckArr = new ArrayList<Card>(52);
+
+		for (int suit = 0; suit <= 3; suit++) {
+			for (int rank = 1; rank <= 13; rank++) {
+				deckArr.add(new Card(rank, suit));
+			}
+		}
+		int min = 0;
+		int n = deckArr.size();
+		for (int i = 0; i < n; i++) {
+			int r = min + (int) (Math.random() * (n - i));
+			deck.push(deckArr.remove(r));
+		}
+		return deck;
+	}
 
 	public String toString() {
-		String s = "";
-		int k;
+		String s = new String();
+		int k = 0;
 
-		k = 0;
 		for (int i = 0; i < 4; i++) {
 			for (int j = 1; j <= 13; j++) {
-				s += (deckArr[k++] + " ");
+				s += (deck.get(k++) + " ");
 				s += "\n";
 			}
 			s += "\n";
 		}
 		return (s);
+	}
+	
+	public void printDeck()
+	{
+		for(Card c: deck)
+		{
+			System.out.println(c.toString() + " ");
+		}
 	}
 }
