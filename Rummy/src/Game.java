@@ -1,6 +1,5 @@
 import java.util.*;
 
-
 public class Game 
 {
 	static int numberOfPlayers;
@@ -90,10 +89,8 @@ public class Game
 	{
 		Deck shuffledDeck = new Deck();
 		shuffledDeck.createDeck();
-		//shuffledDeck.printDeck();
-		int playerID = 0;
 		Player tempPlayer = new Player();
-		Card tempCard = new Card();
+		Card tempCard = new Card(0, 0);
 		int cardsToBeDealt = 0;
 		
 		if(numberOfPlayers  == 2)
@@ -107,7 +104,6 @@ public class Game
 		{
 			tempPlayer = players.peek();
 			tempCard = shuffledDeck.pop();
-			//System.out.println( " came out of print " + tempCard.toString());
 			tempPlayer.hand.add(tempCard);	
 			players.add(players.poll());
 			cardsToBeDealt--;
@@ -116,7 +112,6 @@ public class Game
 	
 	public void displayTable()
 	{
-		
 		if(numberOfPlayers == 2)
 			displayTableForTwoPlayers();
 		else if(numberOfPlayers == 3)
@@ -131,16 +126,15 @@ public class Game
 	{
 		
 		players.add(players.poll());
-		System.out.printf("%25s%n", "Laid down");
-		System.out.printf("%25s%n", players.peek().getPlayerName());
+		System.out.printf("%50s%n", players.peek().getPlayerName());
+		System.out.printf("%100s%n", "Laid down");
 		players.add(players.poll());
 		
-		System.out.printf("%n%25s", "| X |");
-		System.out.printf("%n%25s%n", "| discard |");
+		System.out.printf("%n%50s", "| X |");
+		System.out.printf("%n%50s%n", "| discard |");
 		
-		System.out.printf("%n%25s%n",  "Laid down");
-		System.out.printf("%25s%n", players.peek().getPlayerName());
-		
+		System.out.printf("%50s%n", players.peek().getPlayerName());
+		System.out.printf("%50s%n", "Laid down");
 	}
 	
 	public void displayTableForThreePlayers()
@@ -148,25 +142,25 @@ public class Game
 		players.add(players.poll());
 		players.add(players.poll());
 		
-		System.out.printf("%-50s%n", "Laid down");
-		System.out.printf("%-50s%n", players.peek().getPlayerName());
+		System.out.printf("%-100s%n", players.peek().getPlayerName());
+		System.out.printf("%-100s%n", "Laid down");
 		
 		players.add(players.poll());
 		players.add(players.poll());
 		
-		System.out.printf("%50s%n", "Laid down");
+		System.out.printf("%100s%n", players.peek().getPlayerName());
+		System.out.printf("%100s%n", "Laid down");
+		
+		players.add(players.poll());
+		players.add(players.poll());
+		
+		System.out.printf("%n%50s", "| X |");
+		System.out.printf("%n%50s%n", "| discard |");
+		System.out.println();
+		System.out.println();
+		
 		System.out.printf("%50s%n", players.peek().getPlayerName());
-		
-		
-		players.add(players.poll());
-		players.add(players.poll());
-		
-		System.out.printf("%n%25s", "| X |");
-		System.out.printf("%n%25s%n", "| discard |");
-		System.out.println();
-		System.out.println();
-		System.out.printf("%n%25s%n",  "Laid down");
-		System.out.printf("%25s%n", players.peek().getPlayerName());
+		System.out.printf("%100s%n", "Laid down");
 		System.out.printf("%5s", "");
 		
 		for(Card c: players.peek().hand)
@@ -179,42 +173,40 @@ public class Game
 	{
 		players.add(players.poll());
 		players.add(players.poll());
+		StringAlignUtils centerJustify = new StringAlignUtils(150, "CENTER");
+		System.out.printf(centerJustify.format(players.peek().getPlayerName()));
+		System.out.printf(centerJustify.format("Laid down"));
 		
-		//System.out.printf("%25s%n", "Laid down");
-		System.out.printf("%25s%n", players.peek().getPlayerName());
-		
 		players.add(players.poll());
 		players.add(players.poll());
 		players.add(players.poll());
-//		System.out.printf("%-50s%n", "Laid down");
-		System.out.printf("%-50s%n", players.peek().getPlayerName());
+		//System.out.printf("%-100s", players.peek().getPlayerName());
+		//System.out.printf("%n%-100s%n",  "Laid down");
+		System.out.println(players.peek().getPlayerName());
+		System.out.println("Laid down: ");
 
 		System.out.println();
 		System.out.println();
-		System.out.printf("%n%25s", "| X |");
-		System.out.printf("%n%25s%n", "| discard |");
+		System.out.printf("%n%50s", "| X |");
+		System.out.printf("%n%50s%n", "| discard |");
 		System.out.println();
 		System.out.println();
 
-		
 		players.add(players.poll());
 		players.add(players.poll());
-		//players.add(players.poll());
-//		System.out.printf("%50s%n", "Laid down");
-		System.out.printf("%50s%n", players.peek().getPlayerName());
-		
+		System.out.printf("%100s", players.peek().getPlayerName());
+		System.out.printf("%n%100s%n",  "Laid down");
 			
 		players.add(players.poll());
-//		players.add(players.poll());
-//		players.add(players.poll());
-//		System.out.printf("%n%25s%n",  "Laid down");
-		System.out.printf("%25s%n", players.peek().getPlayerName());
+		System.out.printf("%50s", players.peek().getPlayerName());
+		System.out.printf("%n%50s%n",  "Laid down");
 		System.out.printf("%5s", "");
 		
 		for(Card c: players.peek().hand)
 		{
 			System.out.print("| " + c.toString() + " | " );
 		}
+		
 		System.out.println();
 		System.out.println();
 	}

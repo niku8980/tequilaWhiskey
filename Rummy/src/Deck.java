@@ -1,31 +1,19 @@
 import java.util.*;
-import java.io.*;
 
 public class Deck {
-	//Stack<Card> deck = new Stack<Card>();
 	Stack<Card> deck;
+
 	public Deck() 
 	{
-		//this.createDeck();
 		deck = new Stack<Card>();
-		
-	}
-	
-	public Deck(int numberOfPlayers)
-	{
-		
 	}
 
 	public Stack<Card> createDeck() {
 		ArrayList<Card> deckArr = new ArrayList<Card>();
-		//Stack<Card> shuffledDeck = new Stack<Card>();
-		int idx = 0;
+		
 		for (int suit = 0; suit <= 3; suit++) {
 			for (int rank = 1; rank <= 13; rank++) {
-				//int i = 0;
 				deckArr.add(new Card(rank, suit));
-				//System.out.println("added : " + deckArr.get(idx));
-				idx++;
 			}
 		}
 		int min = 0;
@@ -34,7 +22,6 @@ public class Deck {
 		{
 			int r = min + (int) (Math.random() * (n - i));
 			deck.push(deckArr.remove(r));
-			//System.out.println("printing from shuffled deck: " + shuffledDeck.get(i));
 		}
 		return deck;
 	}
