@@ -1,5 +1,6 @@
 import java.util.*;
 
+
 public class Game 
 {
 	static int numberOfPlayers;
@@ -8,6 +9,7 @@ public class Game
 	static int scoreCap;
 	static Queue<Player> players;
 	static Scanner playerInput;
+	
 	
 	public Game()
 	{
@@ -21,11 +23,17 @@ public class Game
 			
 	void setUpGame() 
 	{
-		welcomeScreen();
+//		welcomeScreen();
 		getGameInfo();
 		setUpPlayers();
-		printStats();
-				
+//		clearConsole();
+		
+		distributeCards();
+		
+		//printStats();
+		displayTable();
+		nextTurn();
+		displayTable();
 		//clearConsole();
 	}
 	
@@ -76,6 +84,150 @@ public class Game
 			playerID++;
 		}
 		System.out.println();
+	}
+	
+	public void distributeCards()
+	{
+		Deck shuffledDeck = new Deck();
+		shuffledDeck.createDeck();
+		//shuffledDeck.printDeck();
+		int playerID = 0;
+		Player tempPlayer = new Player();
+		Card tempCard = new Card();
+		int cardsToBeDealt = 0;
+		
+		if(numberOfPlayers  == 2)
+			cardsToBeDealt = 20;
+		else if(numberOfPlayers == 3)
+			cardsToBeDealt  = 21;
+		else
+			cardsToBeDealt = 28;
+		
+		while(cardsToBeDealt != 0)
+		{
+			tempPlayer = players.peek();
+			tempCard = shuffledDeck.pop();
+			//System.out.println( " came out of print " + tempCard.toString());
+			tempPlayer.hand.add(tempCard);	
+			players.add(players.poll());
+			cardsToBeDealt--;
+		}	
+	}
+	
+	public void displayTable()
+	{
+		
+		if(numberOfPlayers == 2)
+			displayTableForTwoPlayers();
+		else if(numberOfPlayers == 3)
+			displayTableForThreePlayers();
+		else
+			displayTableForFourPlayers();
+		displayOptions();
+	}
+	
+	
+	public void displayTableForTwoPlayers()
+	{
+		
+		players.add(players.poll());
+		System.out.printf("%25s%n", "Laid down");
+		System.out.printf("%25s%n", players.peek().getPlayerName());
+		players.add(players.poll());
+		
+		System.out.printf("%n%25s", "| X |");
+		System.out.printf("%n%25s%n", "| discard |");
+		
+		System.out.printf("%n%25s%n",  "Laid down");
+		System.out.printf("%25s%n", players.peek().getPlayerName());
+		
+	}
+	
+	public void displayTableForThreePlayers()
+	{
+		players.add(players.poll());
+		players.add(players.poll());
+		
+		System.out.printf("%-50s%n", "Laid down");
+		System.out.printf("%-50s%n", players.peek().getPlayerName());
+		
+		players.add(players.poll());
+		players.add(players.poll());
+		
+		System.out.printf("%50s%n", "Laid down");
+		System.out.printf("%50s%n", players.peek().getPlayerName());
+		
+		
+		players.add(players.poll());
+		players.add(players.poll());
+		
+		System.out.printf("%n%25s", "| X |");
+		System.out.printf("%n%25s%n", "| discard |");
+		System.out.println();
+		System.out.println();
+		System.out.printf("%n%25s%n",  "Laid down");
+		System.out.printf("%25s%n", players.peek().getPlayerName());
+		System.out.printf("%5s", "");
+		
+		for(Card c: players.peek().hand)
+		{
+			System.out.print("| " + c.toString() + " | " );
+		}
+	}
+	
+	public void displayTableForFourPlayers()
+	{
+		players.add(players.poll());
+		players.add(players.poll());
+		
+		//System.out.printf("%25s%n", "Laid down");
+		System.out.printf("%25s%n", players.peek().getPlayerName());
+		
+		players.add(players.poll());
+		players.add(players.poll());
+		players.add(players.poll());
+//		System.out.printf("%-50s%n", "Laid down");
+		System.out.printf("%-50s%n", players.peek().getPlayerName());
+
+		System.out.println();
+		System.out.println();
+		System.out.printf("%n%25s", "| X |");
+		System.out.printf("%n%25s%n", "| discard |");
+		System.out.println();
+		System.out.println();
+
+		
+		players.add(players.poll());
+		players.add(players.poll());
+		//players.add(players.poll());
+//		System.out.printf("%50s%n", "Laid down");
+		System.out.printf("%50s%n", players.peek().getPlayerName());
+		
+			
+		players.add(players.poll());
+//		players.add(players.poll());
+//		players.add(players.poll());
+//		System.out.printf("%n%25s%n",  "Laid down");
+		System.out.printf("%25s%n", players.peek().getPlayerName());
+		System.out.printf("%5s", "");
+		
+		for(Card c: players.peek().hand)
+		{
+			System.out.print("| " + c.toString() + " | " );
+		}
+		System.out.println();
+		System.out.println();
+	}
+	
+	public void displayOptions()
+	{
+		System.out.println("\n1.  Pick up from Deck.");
+		System.out.println("2.  Pick up from discard pile.");		
+	}
+	
+	public void nextTurn()
+	{
+		players.add(players.poll());
 	}
 	
 	public void printStats()

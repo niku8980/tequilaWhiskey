@@ -1,12 +1,13 @@
 import java.util.*;
 import java.io.*;
 
-public class Player extends Deck
+public class Player
 {
 	int playerID;				
 	int playerScore;
 	String playerName;
-	Deck hand;
+	ArrayList<Card> hand;
+	ArrayList<Card> laidDown;
 	Scanner playerInput;
 	
 	public Player() {
@@ -14,7 +15,8 @@ public class Player extends Deck
 		playerID = -1;
 		playerScore = 0;
 		playerName = new String();
-		hand = new Deck();
+		hand = new ArrayList<Card>();
+		laidDown = new ArrayList<Card>();
 		playerInput = new Scanner(System.in);
 	}
 
@@ -23,6 +25,11 @@ public class Player extends Deck
 		return playerID;
 	}
 
+	/*public Player getPlayerByID(int playerID)
+	{
+		
+	}
+	*/
 	public void setPlayerID(int playerID)
 	{
 		this.playerID = playerID;
@@ -53,6 +60,5 @@ public class Player extends Deck
 		System.out.println("\tPlayer ID: " + (this.playerID + 1));
 		System.out.println("\tPlayer Name: " + this.playerName);
 		System.out.println("\tPlater Score: " + this.playerScore);
-		this.printDeck();
 	}
 }

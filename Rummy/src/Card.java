@@ -3,21 +3,27 @@ import java.io.*;
 
 public class Card {
 
-	public static final String[] RANKS = { null, "Ace", "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen",
-			"King" };
+	public static final String[] RANKS = { null, "A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q",
+			"K" };
 
-	public static final String[] SUITS = { "Clubs", "Diamonds", "Hearts", "Spades" };
+	public static final String[] SUITS = { "C", "D", "H", "S" };
 
 	int rank;
 	int suit;
 
+	public Card()
+	{
+		int rank = 1; 
+		int suit = 0;
+	}
+	
 	public Card(int rank, int suit) {
 		this.rank = rank;
 		this.suit = suit;
 	}
 
-	public int getCard() {
-		return rank;
+	public int getRank() {
+		return rank ;
 	}
 
 	public void setCard(int rank) {
@@ -33,6 +39,6 @@ public class Card {
 	}
 
 	public String toString() {
-		return RANKS[this.rank] + " of " + SUITS[this.suit];
+		return RANKS[this.rank] + " " + SUITS[this.suit];
 	}
 }
