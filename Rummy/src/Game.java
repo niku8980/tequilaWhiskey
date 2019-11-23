@@ -192,6 +192,7 @@ public class Game
 		System.out.println();
 		System.out.println();
 
+		
 		players.add(players.poll());
 		players.add(players.poll());
 		System.out.printf("%100s", players.peek().getPlayerName());
