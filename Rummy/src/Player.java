@@ -24,11 +24,6 @@ public class Player
 		return playerID;
 	}
 
-	/*public Player getPlayerByID(int playerID)
-	{
-		
-	}
-	*/
 	public void setPlayerID(int playerID)
 	{
 		this.playerID = playerID;

@@ -9,10 +9,6 @@ public class StringAlignUtils extends Format {
  
     private static final long serialVersionUID = 1L;
  
-    public enum Alignment {
-        LEFT, CENTER, RIGHT,
-    }
- 
     /** Current justification for formatting */
     private String currentAlignment;
  
@@ -52,7 +48,6 @@ public class StringAlignUtils extends Format {
                     where.append(wanted);
                     break;
                 case "CENTER":
-                	
                     int toAdd = maxChars - wanted.length();
                     pad(where, toAdd / 2);
                     where.append(wanted);

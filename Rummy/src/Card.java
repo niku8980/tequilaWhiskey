@@ -1,19 +1,13 @@
 public class Card {
 
-	public static final String[] RANKS = { null, "A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q",
-			"K" };
+	public static final String[] RANKS = { null, " A", " 2", " 3", " 4", " 5", " 6", " 7", " 8", " 9", "10", " J", " Q",
+			" K" };
 
 	public static final String[] SUITS = { "C", "D", "H", "S" };
 
 	int rank;
 	int suit;
 
-/*	public Card()
-	{
-		int rank; 
-		int suit = 0;
-	}
-*/	
 	public Card(int rank, int suit) {
 		this.rank = rank;
 		this.suit = suit;

@@ -55,11 +55,13 @@ public class Deck {
 		return (s);
 	}
 	
+	
+	
 	public void printDeck()
 	{
 		for(Card c: deck)
 		{
-			System.out.println(c.toString() + " ");
+			System.out.print(c.toString() + " ");
 		}
 	}
 }
