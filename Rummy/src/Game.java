@@ -10,6 +10,7 @@ public class Game
 	static Scanner playerInput;
 	static ArrayList<Card> discardPile;
 	static Deck shuffledDeck = new Deck();
+	static Player currentPlayer;
 	
 	StringAlignUtils leftJustify;
 	StringAlignUtils centerJustify;
@@ -28,26 +29,37 @@ public class Game
 		centerJustify = new StringAlignUtils(150, "CENTER");
 		rightJustify = new StringAlignUtils(150, "RIGHT");
 		discardPile = new ArrayList<Card>();
+		currentPlayer = new Player();
 	}
 			
 	void setUpGame() 
 	{
-//		welcomeScreen();
+		int input = 0;
+		welcomeScreen();
 		getGameInfo();
 		setUpPlayers();
 //		clearConsole();
-		
 		distributeCards();
 		
+		while(input != -1)
+		{				
+//				
 		//printStats();
 		displayTable();
-		
-		players.peek().laidDown.addAll(suitRun(players.peek().hand));
-		displayTable();
-		
+		displayOptions();
+		System.out.println("---------------------------------------------------------------------------------------------------------------------");
+		displayTurn();
+//		players.peek().laidDown.addAll(suitRun(players.peek().hand));
+//		displayTable();
+		System.out.println("*********************************************************************************************************************");
 		nextTurn();
+
 		//clearConsole();
+		System.out.println("Quit???");
+		input = playerInput.nextInt();
 		
+		System.out.println("=====================================================================================================================");
+		}
 	}
 	
 	
@@ -141,17 +153,23 @@ public class Game
 			displayTableForThreePlayers();
 		else
 			displayTableForFourPlayers();
-		displayOptions();
+		
 	}
 	
 	
 	public void displayTableForTwoPlayers()
 	{
-		
+		int i = 1;
 		players.add(players.poll());
 		
 		System.out.println(centerJustify.format(players.peek().getPlayerName()));
 		System.out.println(centerJustify.format("Laid down"));
+		
+		for(Card c: players.peek().laidDown)
+		{
+			System.out.print(centerJustify.format( ".  | " + c.toString() + "  | " ));
+			i++;
+		}
 		
 		
 		//System.out.printf("%50s%n", players.peek().getPlayerName());
@@ -164,28 +182,35 @@ public class Game
 		System.out.println(centerJustify.format("| X |"));
 		System.out.println(centerJustify.format("| DISCARD |"));		
 		
+		System.out.println();
+		System.out.println();System.out.println();
+		
+		i = 1;
+		
+		for(Card c: discardPile)
+		{
+			System.out.print(centerJustify.format(i + ".  | " + c.toString() + "  | " ));
+			i++;
+		}
+		
+		System.out.println();
+		System.out.println();
+		System.out.println();
 		
 		System.out.println(centerJustify.format(players.peek().getPlayerName()));
 		System.out.println(centerJustify.format("Laid down"));
-		int i = 1;
-		System.out.println("\n\n");
 		
+		System.out.println("\n\n");
+		i = 1;
 		for(Card c: players.peek().laidDown)
 		{
-			System.out.print(centerJustify.format(i + ".  | " + c.toString() + "  | " ));
+			System.out.print(centerJustify.format(".  | " + c.toString() + "  | " ));
 			i++;
 		}
 		System.out.println("\n\n");
 		System.out.println(centerJustify.format("Cards in hand: "));
 		i = 1;
-		for(Card c: players.peek().hand)
-		{
-			System.out.print(centerJustify.format(i + ".  | " + c.toString() + "  | " ));
-			i++;
-		}
-		
-		
-		System.out.println("\nSorsted list\n");
+				
 		sortHand(players.peek().hand);
 		
 		for(Card c: players.peek().hand)
@@ -193,7 +218,7 @@ public class Game
 			System.out.print(centerJustify.format(i + ".  | " + c.toString() + "  | " ));
 			i++;
 		}
-		
+		currentPlayer = players.peek();
 //		System.out.printf("%50s%n", players.peek().getPlayerName());
 //		System.out.printf("%50s%n", "Laid down");
 	}
@@ -228,6 +253,7 @@ public class Game
 		{
 			System.out.print("|" + c.toString() + " | " );
 		}
+		currentPlayer = players.peek();
 	}
 	
 	public void displayTableForFourPlayers()
@@ -270,20 +296,55 @@ public class Game
 		
 		System.out.println();
 		System.out.println();
+		currentPlayer = players.peek();
 	}
 	
 	public void displayOptions()
 	{
+		int option = 0;
 		System.out.println("\n1.  Pick up from Deck.");
-		System.out.println("2.  Pick up from discard pile.");		
+		System.out.println("2.  Pick up from discard pile.");	
+		option = playerInput.nextInt();
+		if(option == 1)
+		{
+			System.out.println("in the if part of ");
+			draw(currentPlayer.hand);
+			System.out.println();
+		}
+		else
+		{
+			System.out.println("in the else part");
+			drawFromDiscard(currentPlayer.hand);
+		}
+	}
+	
+	public void displayTurn()
+	{
+		int option = 0;
+		do
+		{
+		System.out.println("\n1. Make a run.");
+		System.out.println("2.  Discard a card.");	
+		option = playerInput.nextInt();
+			if(option == 1)
+			{	
+				currentPlayer.laidDown.addAll(suitRun(currentPlayer.hand));
+				displayTable();
+			}
+			else
+		discard(currentPlayer.hand);
+		}while(option != 2);
 	}
 	
 	public ArrayList<Card> suitRun(ArrayList<Card> hand)
 	{
 		ArrayList<Card> cards  = new ArrayList<Card>();
+		int cardNumber = 0;
 		if(!checkRun(hand))
+		{	
 			System.out.println("There is no possible suit or set");
-			
+			displayTurn();
+		}	
 		else
 		{
 			int numberOfCards = 0;
@@ -293,10 +354,13 @@ public class Game
 				numberOfCards = playerInput.nextInt();
 			}while(numberOfCards < 3);
 			
+			System.out.println("Enter the card number: ");
+			cardNumber = playerInput.nextInt()-1;
+			
 			while(numberOfCards != 0)
 			{
-				System.out.println("Enter the card number: ");
-				Card removeCard = hand.remove(playerInput.nextInt()-1);
+				
+				Card removeCard = hand.remove(cardNumber);
 				cards.add(removeCard);
 				numberOfCards--;
 			}
@@ -351,19 +415,54 @@ public class Game
 		System.out.print("Choose a card to discard: ");
 		num = playerInput.nextInt();
 		
-		discardPile.add(hand.remove(num-1));		
+		discardPile.add(hand.remove(num-1));
+		nextTurn();
 	}
 	
 	public void draw(ArrayList<Card> hand)
 	{
 		hand.add(shuffledDeck.pop());
+		sortHand(hand);
+		clearConsole();
+		displayTable();
 	}
 	
+	public void drawFromDiscard(ArrayList<Card> hand)
+	{
+		int cardNumber = 0;
+		System.out.print("Enter the card number you want: ");
+		cardNumber = playerInput.nextInt() - 1;
+		
+		Card tempCard = discardPile.get(cardNumber); 
+		
+		hand.add(tempCard);
+		
+		if(!checkRun(hand))
+		{
+			hand.remove(tempCard);
+			System.out.println("No run possible with the card chosen...");
+			return;
+		}
+		
+		hand.remove(tempCard);
+		
+		for(int i = cardNumber; i  < discardPile.size(); i++)
+		{
+			hand.add(discardPile.remove(i));
+		}	
+		clearConsole();
+		displayTable();
+	}
 	
-	
+		
 	public void nextTurn()
 	{
 		players.add(players.poll());
+		displayTable();
+		displayOptions();
+		System.out.println("---------------------------------------------------------------------------------------------------------------------");
+		displayTurn();
+		
 	}
 	
 	public void printStats()
@@ -378,6 +477,7 @@ public class Game
 	
 	public final static void clearConsole()
 	{
-		for (int i = 0; i < 100; ++i) System.out.println();
+		for(int i = 0; i < 50; i++)
+			System.out.println();
 	}
 }
