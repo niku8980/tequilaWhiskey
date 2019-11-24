@@ -431,25 +431,37 @@ public class Game
 	{
 		int cardNumber = 0;
 		System.out.print("Enter the card number you want: ");
-		cardNumber = playerInput.nextInt() - 1;
+		cardNumber = (playerInput.nextInt()-1);
 		
-		Card tempCard = discardPile.get(cardNumber); 
+//		Card tempCard = discardPile.get(cardNumber); 
 		
-		hand.add(tempCard);
+//		hand.add(tempCard);
+		int temp = cardNumber;
+//		if(!checkRun(hand))
+//		{
+//			hand.remove(tempCard);
+//			System.out.println("No run possible with the card chosen...");
+//			return;
+//		}
+//		hand.remove(tempCard);
 		
-		if(!checkRun(hand))
+		while(cardNumber != discardPile.size())
 		{
-			hand.remove(tempCard);
-			System.out.println("No run possible with the card chosen...");
-			return;
+			Card removeCard = discardPile.get(cardNumber);
+			hand.add(removeCard);
+			cardNumber++;
+		}
+		int pileSize = discardPile.size()-1;
+		while(temp-1 != pileSize)
+		{
+			discardPile.remove(pileSize);
+			pileSize--;
 		}
 		
-		hand.remove(tempCard);
-		
-		for(int i = cardNumber; i  < discardPile.size(); i++)
-		{
-			hand.add(discardPile.remove(i));
-		}	
+//		for(int i = cardNumber-1; i  < discardPile.size(); i++)
+//		{
+//			hand.add(discardPile.remove(i));
+//		}	
 		clearConsole();
 		displayTable();
 	}
