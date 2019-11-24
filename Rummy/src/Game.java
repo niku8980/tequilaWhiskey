@@ -433,17 +433,17 @@ public class Game
 		System.out.print("Enter the card number you want: ");
 		cardNumber = (playerInput.nextInt()-1);
 		
-//		Card tempCard = discardPile.get(cardNumber); 
+		Card tempCard = discardPile.get(cardNumber); 
 		
-//		hand.add(tempCard);
+		hand.add(tempCard);
 		int temp = cardNumber;
-//		if(!checkRun(hand))
-//		{
-//			hand.remove(tempCard);
-//			System.out.println("No run possible with the card chosen...");
-//			return;
-//		}
-//		hand.remove(tempCard);
+		if(!checkRun(hand))
+		{
+			hand.remove(tempCard);
+			System.out.println("No run possible with the card chosen...");
+			return;
+		}
+		hand.remove(tempCard);
 		
 		while(cardNumber != discardPile.size())
 		{
