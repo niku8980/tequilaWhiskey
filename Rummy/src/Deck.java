@@ -41,6 +41,11 @@ public class Deck {
 		deck.push(card);
 	}
 	
+	public int size()
+	{
+		return deck.size();
+	}
+	
 	public String toString() {
 		String s = new String();
 		int k = 0;

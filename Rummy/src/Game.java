@@ -12,9 +12,14 @@ public class Game
 	static Deck shuffledDeck = new Deck();
 	static Player currentPlayer;
 	
-	StringAlignUtils leftJustify;
-	StringAlignUtils centerJustify;
-	StringAlignUtils rightJustify;
+	AlignString leftJustifyPlayer;
+	AlignString centerJustifyPlayer;
+	AlignString rightJustifyPlayer;
+	AlignString leftJustifyCard;
+	AlignString centerJustifyCard;
+	AlignString rightJustifyCard;
+	AlignString centerCase;
+	
 	
 	
 	public Game()
@@ -25,9 +30,13 @@ public class Game
 		scoreCap = 0;
 		players = new LinkedList<Player>();
 		playerInput = new Scanner(System.in);
-		leftJustify = new StringAlignUtils(150, "LEFT");
-		centerJustify = new StringAlignUtils(150, "CENTER");
-		rightJustify = new StringAlignUtils(150, "RIGHT");
+		leftJustifyPlayer = new AlignString(150, "LEFTPLAYER");
+		centerJustifyPlayer = new AlignString(150, "CENTERPLAYER");
+		rightJustifyPlayer = new AlignString(150, "RIGHTPLAYER");
+		rightJustifyCard = new AlignString(150, "RIGHTCARD");
+		leftJustifyCard = new AlignString(150, "LEFTCARD");
+		centerJustifyCard = new AlignString(150, "CENTERCARD");
+		centerCase = new AlignString(150, "CENTERCASE");
 		discardPile = new ArrayList<Card>();
 		currentPlayer = new Player();
 	}
@@ -151,8 +160,8 @@ public class Game
 			displayTableForTwoPlayers();
 		else if(numberOfPlayers == 3)
 			displayTableForThreePlayers();
-		else
-			displayTableForFourPlayers();
+		//else
+		//	displayTableForFourPlayers();
 		
 	}
 	
@@ -162,65 +171,14 @@ public class Game
 		int i = 1;
 		players.add(players.poll());
 		
-		System.out.println(centerJustify.format(players.peek().getPlayerName()));
-		System.out.println(centerJustify.format("Laid down"));
-		
-		for(Card c: players.peek().laidDown)
-		{
-			System.out.print(centerJustify.format( ".  | " + c.toString() + "  | " ));
-			i++;
-		}
-		
-		
-		//System.out.printf("%50s%n", players.peek().getPlayerName());
-//		System.out.printf("%100s%n", "Laid down");
-		players.add(players.poll());
-		
-		//System.out.printf("%n%50s", "| X |");
-		//System.out.printf("%n%50s%n", "| discard |");
-	
-		System.out.println(centerJustify.format("| X |"));
-		System.out.println(centerJustify.format("| DISCARD |"));		
-		
-		System.out.println();
-		System.out.println();System.out.println();
-		
-		i = 1;
-		
-		for(Card c: discardPile)
-		{
-			System.out.print(centerJustify.format(i + ".  | " + c.toString() + "  | " ));
-			i++;
-		}
-		
-		System.out.println();
-		System.out.println();
-		System.out.println();
-		
-		System.out.println(centerJustify.format(players.peek().getPlayerName()));
-		System.out.println(centerJustify.format("Laid down"));
-		
-		System.out.println("\n\n");
-		i = 1;
-		for(Card c: players.peek().laidDown)
-		{
-			System.out.print(centerJustify.format(".  | " + c.toString() + "  | " ));
-			i++;
-		}
-		System.out.println("\n\n");
-		System.out.println(centerJustify.format("Cards in hand: "));
-		i = 1;
+		printPlayerInfo();
 				
-		sortHand(players.peek().hand);
+		displayDeckAndDiscard();
+		players.add(players.poll());
+
+		printCurrentPlayerInfo();
 		
-		for(Card c: players.peek().hand)
-		{
-			System.out.print(centerJustify.format(i + ".  | " + c.toString() + "  | " ));
-			i++;
-		}
 		currentPlayer = players.peek();
-//		System.out.printf("%50s%n", players.peek().getPlayerName());
-//		System.out.printf("%50s%n", "Laid down");
 	}
 	
 	public void displayTableForThreePlayers()
@@ -228,8 +186,7 @@ public class Game
 		players.add(players.poll());
 		players.add(players.poll());
 		
-		System.out.printf("%-100s%n", players.peek().getPlayerName());
-		System.out.printf("%-100s%n", "Laid down");
+		printPlayerInfo();
 		
 		players.add(players.poll());
 		players.add(players.poll());
@@ -255,10 +212,10 @@ public class Game
 		}
 		currentPlayer = players.peek();
 	}
-	
+	/*
 	public void displayTableForFourPlayers()
 	{
-		players.add(players.poll());
+	/*	players.add(players.poll());
 		players.add(players.poll());
 		System.out.print(centerJustify.format(players.peek().getPlayerName()));
 		System.out.print(centerJustify.format("Laid down"));
@@ -298,7 +255,7 @@ public class Game
 		System.out.println();
 		currentPlayer = players.peek();
 	}
-	
+	*/
 	public void displayOptions()
 	{
 		int option = 0;
@@ -316,6 +273,68 @@ public class Game
 			System.out.println("in the else part");
 			drawFromDiscard(currentPlayer.hand);
 		}
+	}
+	
+	public void printPlayerInfo()
+	{   int i = 1; 
+		System.out.print(centerJustifyPlayer.format((players.peek().getPlayerID() + 1 )+".  " + players.peek().getPlayerName()));
+		System.out.print(centerJustifyPlayer.format("Laid down"));
+		
+		for(Card c: players.peek().laidDown)
+		{
+			System.out.print(centerJustifyCard.format( ".  | " + c.toString() + "  | " ));
+			i++;
+		}		
+		
+		System.out.println();
+		System.out.println();
+		System.out.println();
+	}
+	
+	public void printCurrentPlayerInfo()
+	{
+		System.out.println(centerJustifyPlayer.format((players.peek().getPlayerID() + 1 )+".  " + players.peek().getPlayerName()));
+		System.out.println(centerJustifyPlayer.format("Laid down"));
+		
+		int i = 1;
+		for(Card c: players.peek().laidDown)
+		{
+			System.out.print(centerJustifyCard.format(".  | " + c.toString() + "  | " ));
+			i++;
+		}
+		
+		System.out.println(centerJustifyPlayer.format("Cards in hand: "));
+				
+		sortHand(players.peek().hand);
+		
+		System.out.print(centerCase.format(" "));
+		
+		i = 1;
+		for(Card c: players.peek().hand)
+		{
+			System.out.print(centerJustifyCard.format(i + ".   | " + c.toString() + "  | " ));
+			i++;
+		}
+	}
+	
+	public void displayDeckAndDiscard()
+	{
+		System.out.print(centerJustifyPlayer.format("Deck: | X |"));
+		System.out.print(centerJustifyPlayer.format("Deck has " + (shuffledDeck.size() + 1) + " card(s)"));
+		System.out.print(centerJustifyPlayer.format("| DISCARD |"));		
+		
+		System.out.print(centerCase.format(" "));
+		int i = 1;
+		
+		for(Card c: discardPile)
+		{
+			System.out.print(centerJustifyCard.format(i + ".  | " + c.toString() + "  | " ));
+			i++;
+		}
+		
+		System.out.println();
+		System.out.println();
+		System.out.println();
 	}
 	
 	public void displayTurn()
@@ -466,7 +485,6 @@ public class Game
 		displayTable();
 	}
 	
-		
 	public void nextTurn()
 	{
 		players.add(players.poll());

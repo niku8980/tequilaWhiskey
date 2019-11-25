@@ -1,10 +1,3 @@
-import java.text.FieldPosition;
-import java.text.Format;
-import java.text.ParsePosition;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.ListIterator;
-
 public class AlignString 
 {
 	private String alignment;
@@ -14,18 +7,56 @@ public class AlignString
 	{
 		switch(alignment)
 		{
-		case "LEFT":
-		case "CENTER":
-		case "RIGHT":
+		case "LEFTPLAYER":
+		case "CENTERPLAYER":
+		case "RIGHTPLAYER":
+		case "LEFTCARD":
+		case "RIGHTCARD":
+		case "CENTERCARD":
+		case "CENTERCASE":
 			this.alignment = alignment;
 			this.stringLength = stringLength;
 			break;
 		}
 	}
 	
-	//public StringBuffer format(Object input, StringBuffer where, FieldPosition ignore)
-	//{
-	//	String str = input.toString();
-		//
-	//}
+	public String format(String input)
+	{
+		String str = input.toString();
+		StringBuilder retString = new StringBuilder();
+		switch(alignment)
+		{
+			case "CENTERPLAYER" :
+				pad(retString, (stringLength)/2);
+				retString.append(str);
+				pad(retString, (stringLength)/2);
+				break;
+			case "CENTERCARD":
+				pad(retString, (stringLength)/2);
+				retString.append(str + " ");
+				break;
+			case "LEFTPLAYER" :
+				retString.append(str);
+				pad(retString, stringLength - str.length());
+			case "LEFTCARD":
+				retString.append(str + " ");
+				break;
+			case "RIGHTPLAYER": 
+				pad(retString, stringLength - 50);
+				retString.append(str);
+				break;				
+			case "RIGHTCARD":
+				pad(retString, stringLength - 50);
+				retString.append(str);
+				break;
+		}	
+		retString.append("\n");
+		return retString.toString();
+	}
+	
+	protected final void pad(StringBuilder str, int paddingLength)
+	{
+		for(int i = 0; i < paddingLength; i++)
+			str.append(' ');
+	}
 }
