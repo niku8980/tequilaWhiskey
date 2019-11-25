@@ -358,6 +358,7 @@ public class Game
 	public ArrayList<Card> suitRun(ArrayList<Card> hand)
 	{
 		ArrayList<Card> cards  = new ArrayList<Card>();
+		Card tempCard = new Card(-1);
 		int cardNumber = 0;
 		if(!checkRun(hand))
 		{	
@@ -373,15 +374,25 @@ public class Game
 				numberOfCards = playerInput.nextInt();
 			}while(numberOfCards < 3);
 			
-			System.out.println("Enter the card number: ");
-			cardNumber = playerInput.nextInt()-1;
-			
+			int tempn= numberOfCards;
 			while(numberOfCards != 0)
 			{
-				
+				System.out.println("Enter the card number: ");
+				cardNumber = (playerInput.nextInt())-1;
 				Card removeCard = hand.remove(cardNumber);
+				
+				hand.add(cardNumber, tempCard);
 				cards.add(removeCard);
 				numberOfCards--;
+			}
+			
+			sortHand(hand);
+			
+//			for(int i = 0; i < tempn; i++)
+			while(tempn != 0)
+			{
+					hand.remove(hand.get(0));
+					tempn--;
 			}
 		}
 		
@@ -402,11 +413,74 @@ public class Game
 
 		// suit run check
 		
-		for(int i = 0 ; i < hand.size()-2; i++)
+		
+		ArrayList<Card> clubCards = new ArrayList<Card>();
+		ArrayList<Card> spadeCards = new ArrayList<Card>();
+		ArrayList<Card> diamondCards = new ArrayList<Card>();
+		ArrayList<Card> heartCards = new ArrayList<Card>();
+		
+		for(Card c: hand)
 		{
-			if(hand.get(i).getRank() == hand.get(i + 1).getRank() && hand.get(i).getSuit() == hand.get(i + 1).getSuit())
-				if(hand.get(i).getRank() == hand.get(i+2).getRank() && hand.get(i).getSuit() == hand.get(i+2).getSuit())
-					return true;
+			if(c.getSuit() == 0)	// add club cards to arraylist
+			{
+				clubCards.add(c);
+				sortHand(clubCards);
+			}
+			else if(c.getSuit() == 1) 	//add all diamond cards to the arraylist
+			{
+				diamondCards.add(c);
+				sortHand(diamondCards);
+			}
+			else if(c.getSuit() == 2)	// add all heart cards to the arraylist
+			{
+				heartCards.add(c);
+				sortHand(heartCards);
+			}
+			else						// add all spade cards to the arraylist
+			{
+				spadeCards.add(c);
+				sortHand(spadeCards);
+			}
+		}
+		
+		if(clubCards.size() > 2)
+		{
+			for(int i = 0 ; i < clubCards.size()-2; i++)
+			{
+				if((clubCards.get(i + 1).getRank() - clubCards.get(i).getRank()) == 1)
+					if((clubCards.get(i + 2).getRank() - clubCards.get(i).getRank()) == 2)
+						return true;
+			}
+		}
+		
+		if(diamondCards.size() > 2)
+		{
+			for(int i = 0 ; i < diamondCards.size()-2; i++)
+			{
+				if((diamondCards.get(i + 1).getRank() - diamondCards.get(i).getRank()) == 1)
+					if((diamondCards.get(i + 2).getRank() - diamondCards.get(i).getRank()) == 2)
+						return true;
+			}
+		}
+		
+		if(heartCards.size() > 2)
+		{
+			for(int i = 0 ; i < heartCards.size()-2; i++)
+			{
+				if((heartCards.get(i + 1).getRank() - heartCards.get(i).getRank()) == 1)
+					if((heartCards.get(i + 2).getRank() - heartCards.get(i).getRank()) == 2)
+						return true;
+			}
+		}
+		
+		if(spadeCards.size() > 2)
+		{
+			for(int i = 0 ; i < spadeCards.size()-2; i++)
+			{
+				if((spadeCards.get(i + 1).getRank() - spadeCards.get(i).getRank()) == 1)
+					if((spadeCards.get(i + 2).getRank() - spadeCards.get(i).getRank()) == 2)
+						return true;
+			}
 		}
 		
 		return false;
@@ -451,18 +525,25 @@ public class Game
 		int cardNumber = 0;
 		System.out.print("Enter the card number you want: ");
 		cardNumber = (playerInput.nextInt()-1);
+		ArrayList<Card> tempHand = new ArrayList<Card>();
 		
-		Card tempCard = discardPile.get(cardNumber); 
-		
-		hand.add(tempCard);
-		int temp = cardNumber;
-		if(!checkRun(hand))
+		for(int i=0; i<hand.size(); i++) 
 		{
-			hand.remove(tempCard);
+			tempHand.add(hand.get(i));
+		}
+		
+		for(int i = cardNumber; i < discardPile.size(); i++ )
+		{
+			tempHand.add(discardPile.get(cardNumber)); 
+		}
+		
+		int temp = cardNumber;
+		if(!checkRun(tempHand))
+		{
 			System.out.println("No run possible with the card chosen...");
+			displayOptions();
 			return;
 		}
-		hand.remove(tempCard);
 		
 		while(cardNumber != discardPile.size())
 		{
