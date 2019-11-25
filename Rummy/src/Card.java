@@ -1,7 +1,7 @@
 public class Card {
 
 	public static final String[] RANKS = { null, " A", " 2", " 3", " 4", " 5", " 6", " 7", " 8", " 9", "10", " J", " Q",
-			" K" };
+			" K" }; 
 
 	public static final String[] SUITS = { "C", "D", "H", "S" };
 

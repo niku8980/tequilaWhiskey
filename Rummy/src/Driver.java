@@ -5,7 +5,7 @@ public class Driver {
 		// TODO Auto-generated method stub
 		
 		Game newGame = new Game();
-		newGame.setUpGame();
+		newGame.setUpGame();  
 	}
 
 }

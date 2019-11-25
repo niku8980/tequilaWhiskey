@@ -8,7 +8,7 @@ public class Player
 	ArrayList<Card> hand;
 	ArrayList<Card> laidDown;
 	Scanner playerInput;
-	
+	 
 	public Player() {
 		super();
 		playerID = -1;

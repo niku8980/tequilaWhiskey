@@ -18,7 +18,7 @@ public class AlignString
 			this.stringLength = stringLength;
 			break;
 		}
-	}
+	} 
 	
 	public String format(String input)
 	{
@@ -50,7 +50,7 @@ public class AlignString
 				retString.append(str);
 				break;
 		}	
-		retString.append("\n");
+		retString.append("\n");  
 		return retString.toString();
 	}
 	

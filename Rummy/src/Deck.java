@@ -1,7 +1,7 @@
 import java.util.*;
 
 public class Deck {
-	Stack<Card> deck;
+	Stack<Card> deck; 
 
 	public Deck() 
 	{

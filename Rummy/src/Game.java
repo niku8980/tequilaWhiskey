@@ -10,7 +10,7 @@ public class Game
 	static Scanner playerInput;
 	static ArrayList<Card> discardPile;
 	static Deck shuffledDeck = new Deck();
-	static Player currentPlayer;
+	static Player currentPlayer; 
 	
 	AlignString leftJustifyPlayer;
 	AlignString centerJustifyPlayer;
