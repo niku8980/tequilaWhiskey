@@ -18,7 +18,7 @@ public class Game
 	AlignString leftJustifyCard;
 	AlignString centerJustifyCard;
 	AlignString rightJustifyCard;
-	AlignString centerCase;
+	//AlignString centerCase;
 	
 	
 	
@@ -30,13 +30,12 @@ public class Game
 		scoreCap = 0;
 		players = new LinkedList<Player>();
 		playerInput = new Scanner(System.in);
-		leftJustifyPlayer = new AlignString(150, "LEFTPLAYER");
-		centerJustifyPlayer = new AlignString(150, "CENTERPLAYER");
-		rightJustifyPlayer = new AlignString(150, "RIGHTPLAYER");
-		rightJustifyCard = new AlignString(150, "RIGHTCARD");
-		leftJustifyCard = new AlignString(150, "LEFTCARD");
-		centerJustifyCard = new AlignString(150, "CENTERCARD");
-		centerCase = new AlignString(150, "CENTERCASE");
+		leftJustifyPlayer = new AlignString(250, "LEFTPLAYER");
+		centerJustifyPlayer = new AlignString(250, "CENTERPLAYER");
+		rightJustifyPlayer = new AlignString(250, "RIGHTPLAYER");
+		rightJustifyCard = new AlignString(250, "RIGHTCARD");
+		leftJustifyCard = new AlignString(250, "LEFTCARD");
+		centerJustifyCard = new AlignString(250, "CENTERCARD");
 		discardPile = new ArrayList<Card>();
 		currentPlayer = new Player();
 	}
@@ -69,16 +68,6 @@ public class Game
 		
 		System.out.println("=====================================================================================================================");
 		}
-	}
-	
-	
-	public void playTheGame()
-	{
-		
-		
-		
-		//suitRun();
-		
 	}
 	
 	public static void welcomeScreen()
@@ -165,97 +154,150 @@ public class Game
 		
 	}
 	
-	
 	public void displayTableForTwoPlayers()
 	{
-		int i = 1;
 		players.add(players.poll());
-		
-		printPlayerInfo();
-				
-		displayDeckAndDiscard();
-		players.add(players.poll());
-
-		printCurrentPlayerInfo();
-		
 		currentPlayer = players.peek();
+		printPlayerInfoCenter(currentPlayer);
+		
+		printDeckAndDiscard();
+		
+		players.add(players.poll());
+		currentPlayer = players.peek();
+		printCurrentPlayerInfo(currentPlayer);
+				
+	}
+	
+	public void printPlayerInfoCenter(Player p)
+	{
+		int playerID = p.getPlayerID() + 1;
+		String playerName = p.getPlayerName();
+		System.out.print(centerJustifyPlayer.format((playerID )+".  " + playerName));
+		
+		System.out.println(centerJustifyPlayer.format("Laid down"));
+		int i = 1;
+		for(Card c: p.laidDown)
+		{
+			System.out.print(centerJustifyCard.format(i +  ".  | " + c.toString() + "  | " ));
+			i++;
+		}
+	}
+	
+	public void printPlayerInfoRight(Player p)
+	{
+		int playerID = p.getPlayerID() + 1;
+		String playerName = p.getPlayerName();
+		System.out.print(rightJustifyPlayer.format((playerID )+".  " + playerName));
+		
+		System.out.println(rightJustifyPlayer.format("Laid down"));
+		int i = 1;
+		for(Card c: p.laidDown)
+		{
+			System.out.print(rightJustifyCard.format(i +  ".  | " + c.toString() + "  | " ));
+			i++;
+		}
+	}
+	
+	public void printPlayerInfoLeft(Player p)
+	{
+		int playerID = p.getPlayerID() + 1;
+		String playerName = p.getPlayerName();
+		System.out.print(leftJustifyPlayer.format((playerID )+".  " + playerName));
+		
+		System.out.println(leftJustifyPlayer.format("Laid down"));
+		int i = 1;
+		for(Card c: p.laidDown)
+		{
+			System.out.print(leftJustifyCard.format(i +  ".  | " + c.toString() + "  | " ));
+			i++;
+		}
+	} 
+	
+	public void printCurrentPlayerInfo(Player p)
+	{
+		int playerID = p.getPlayerID() + 1;
+		String playerName = p.getPlayerName();
+		System.out.print(centerJustifyPlayer.format((playerID )+".  " + playerName));
+		
+		System.out.println(centerJustifyPlayer.format("Laid down"));
+		int i = 1;
+		for(Card c: p.laidDown)
+		{
+			System.out.print(centerJustifyCard.format(i +  ".  | " + c.toString() + "  | " ));
+			i++;
+		}
+		
+		System.out.println(centerJustifyPlayer.format("Cards in hand: "));
+		i = 1;
+		
+		sortHand(p.hand);
+		
+		for(Card c: p.hand)
+		{
+			System.out.print(centerJustifyCard.format(i + ".   | " + c.toString() + "  | " ));
+			i++;
+		}
 	}
 	
 	public void displayTableForThreePlayers()
+
 	{
 		players.add(players.poll());
 		players.add(players.poll());
 		
-		printPlayerInfo();
-		
-		players.add(players.poll());
-		players.add(players.poll());
-		
-		System.out.printf("%100s%n", players.peek().getPlayerName());
-		System.out.printf("%100s%n", "Laid down");
-		
-		players.add(players.poll());
-		players.add(players.poll());
-		
-		System.out.printf("%n%50s", "| X |");
-		System.out.printf("%n%50s%n", "| discard |");
-		System.out.println();
-		System.out.println();
-		
-		System.out.printf("%50s%n", players.peek().getPlayerName());
-		System.out.printf("%100s%n", "Laid down");
-		System.out.printf("%5s", "");
-		
-		for(Card c: players.peek().hand)
-		{
-			System.out.print("|" + c.toString() + " | " );
-		}
 		currentPlayer = players.peek();
+		
+		printPlayerInfoLeft(currentPlayer);
+		
+		players.add(players.poll());
+		players.add(players.poll());
+		
+		currentPlayer = players.peek();
+				
+		printPlayerInfoRight(currentPlayer);
+		
+		printDeckAndDiscard();
+		
+		players.add(players.poll());
+		players.add(players.poll());
+		
+		printCurrentPlayerInfo(currentPlayer);
 	}
-	/*
+	
 	public void displayTableForFourPlayers()
 	{
-	/*	players.add(players.poll());
 		players.add(players.poll());
-		System.out.print(centerJustify.format(players.peek().getPlayerName()));
-		System.out.print(centerJustify.format("Laid down"));
+		players.add(players.poll());
+	
+		currentPlayer = players.peek();
+		
+		printPlayerInfoCenter(currentPlayer);
 		
 		players.add(players.poll());
 		players.add(players.poll());
 		players.add(players.poll());
-		//System.out.printf("%-100s", players.peek().getPlayerName());
-		//System.out.printf("%n%-100s%n",  "Laid down");
-		System.out.println(players.peek().getPlayerName());
-		System.out.println("Laid down: ");
-
-		System.out.println();
-		System.out.println();
-		System.out.printf("%n%50s", "| X |");
-		System.out.printf("%n%50s%n", "| discard |");
-		System.out.println();
-		System.out.println();
-
+		
+		currentPlayer = players.peek();
+		
+		printPlayerInfoLeft(currentPlayer);
+		
+		
+		printDeckAndDiscard();
 		
 		players.add(players.poll());
 		players.add(players.poll());
-		System.out.printf("%100s", players.peek().getPlayerName());
-		System.out.printf("%n%100s%n",  "Laid down");
+		
+		currentPlayer = players.peek();
+		
+		printPlayerInfoRight(currentPlayer);
 			
 		players.add(players.poll());
-		System.out.printf("%50s", players.peek().getPlayerName());
-		System.out.printf("%n%50s%n",  "Laid down");
-		System.out.printf("%5s", "");
 		
-		for(Card c: players.peek().hand)
-		{
-			System.out.print("| " + c.toString() + " | " );
-		}
-		
-		System.out.println();
-		System.out.println();
 		currentPlayer = players.peek();
+		
+		printCurrentPlayerInfo(currentPlayer);
 	}
-	*/
+	
 	public void displayOptions()
 	{
 		int option = 0;
@@ -264,7 +306,6 @@ public class Game
 		option = playerInput.nextInt();
 		if(option == 1)
 		{
-			System.out.println("in the if part of ");
 			draw(currentPlayer.hand);
 			System.out.println();
 		}
@@ -275,55 +316,12 @@ public class Game
 		}
 	}
 	
-	public void printPlayerInfo()
-	{   int i = 1; 
-		System.out.print(centerJustifyPlayer.format((players.peek().getPlayerID() + 1 )+".  " + players.peek().getPlayerName()));
-		System.out.print(centerJustifyPlayer.format("Laid down"));
-		
-		for(Card c: players.peek().laidDown)
-		{
-			System.out.print(centerJustifyCard.format( ".  | " + c.toString() + "  | " ));
-			i++;
-		}		
-		
-		System.out.println();
-		System.out.println();
-		System.out.println();
-	}
-	
-	public void printCurrentPlayerInfo()
-	{
-		System.out.println(centerJustifyPlayer.format((players.peek().getPlayerID() + 1 )+".  " + players.peek().getPlayerName()));
-		System.out.println(centerJustifyPlayer.format("Laid down"));
-		
-		int i = 1;
-		for(Card c: players.peek().laidDown)
-		{
-			System.out.print(centerJustifyCard.format(".  | " + c.toString() + "  | " ));
-			i++;
-		}
-		
-		System.out.println(centerJustifyPlayer.format("Cards in hand: "));
-				
-		sortHand(players.peek().hand);
-		
-		System.out.print(centerCase.format(" "));
-		
-		i = 1;
-		for(Card c: players.peek().hand)
-		{
-			System.out.print(centerJustifyCard.format(i + ".   | " + c.toString() + "  | " ));
-			i++;
-		}
-	}
-	
-	public void displayDeckAndDiscard()
+	public void printDeckAndDiscard()
 	{
 		System.out.print(centerJustifyPlayer.format("Deck: | X |"));
 		System.out.print(centerJustifyPlayer.format("Deck has " + (shuffledDeck.size() + 1) + " card(s)"));
 		System.out.print(centerJustifyPlayer.format("| DISCARD |"));		
 		
-		System.out.print(centerCase.format(" "));
 		int i = 1;
 		
 		for(Card c: discardPile)
@@ -332,9 +330,7 @@ public class Game
 			i++;
 		}
 		
-		System.out.println();
-		System.out.println();
-		System.out.println();
+		System.out.println("\n\n");
 	}
 	
 	public void displayTurn()
@@ -342,21 +338,30 @@ public class Game
 		int option = 0;
 		do
 		{
-		System.out.println("\n1. Make a run.");
-		System.out.println("2.  Discard a card.");	
-		option = playerInput.nextInt();
+			System.out.println("\n1. Make a run.");
+			System.out.println("2.  Discard a card.");	
+			option = playerInput.nextInt();
 			if(option == 1)
 			{	
 				currentPlayer.laidDown.addAll(suitRun(currentPlayer.hand));
 				displayTable();
 			}
 			else
-		discard(currentPlayer.hand);
+				discard(currentPlayer.hand);
 		}while(option != 2);
 	}
 	
 	public ArrayList<Card> suitRun(ArrayList<Card> hand)
+
 	{
+
+		// TODO: when the suite run runs the player can lay down as many cards as possible
+		// TODO: check if the cards laid down by player are a proper match or a proper suit run
+		
+		
+		// TODO: still need to fix the display for 3 and 4 players
+		// TODO: and also sort the cards when the player picks up card from discard pile 
+		
 		ArrayList<Card> cards  = new ArrayList<Card>();
 		Card tempCard = new Card(-1);
 		int cardNumber = 0;
@@ -388,7 +393,6 @@ public class Game
 			
 			sortHand(hand);
 			
-//			for(int i = 0; i < tempn; i++)
 			while(tempn != 0)
 			{
 					hand.remove(hand.get(0));
@@ -397,7 +401,6 @@ public class Game
 		}
 		
 		return cards;
-		
 	}
 	
 	public boolean checkRun(ArrayList<Card> hand)
@@ -558,10 +561,6 @@ public class Game
 			pileSize--;
 		}
 		
-//		for(int i = cardNumber-1; i  < discardPile.size(); i++)
-//		{
-//			hand.add(discardPile.remove(i));
-//		}	
 		clearConsole();
 		displayTable();
 	}

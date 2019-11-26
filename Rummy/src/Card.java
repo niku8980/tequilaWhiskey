@@ -4,10 +4,6 @@ public class Card {
 			" K"}; 
 
 	public static final String[] SUITS = { "C", "D", "H", "S" };
-
-	public static final String[] DUMMYSUIT = {"JOKER"};
-	public static final String[] DUMMYRANK = {"JOKER"};
-	
 	
 	int rank;
 	int suit;
@@ -40,9 +36,6 @@ public class Card {
 	}
 
 	public String toString() {
-		if(this.rank == -1 || this.suit == -1)
-			return "unwanted Card";
-		else
 			return RANKS[this.rank] + " " + SUITS[this.suit];
 	}
 }
