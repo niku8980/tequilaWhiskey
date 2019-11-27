@@ -1,3 +1,4 @@
+package rummy;
 import java.util.*;
 
 public class Deck {
@@ -41,6 +42,11 @@ public class Deck {
 		deck.push(card);
 	}
 	
+	public Card peek()
+	{
+		return deck.peek();
+	}
+	
 	public int size()
 	{
 		return deck.size();
@@ -59,9 +65,7 @@ public class Deck {
 		}
 		return (s);
 	}
-	
-	
-	
+		
 	public void printDeck()
 	{
 		for(Card c: deck)

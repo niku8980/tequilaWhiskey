@@ -1,3 +1,4 @@
+package rummy;
 import java.util.*;
 
 public class Player
@@ -7,7 +8,6 @@ public class Player
 	String playerName;
 	ArrayList<Card> hand;
 	ArrayList<Card> laidDown;
-	Scanner playerInput;
 	 
 	public Player() {
 		super();
@@ -16,7 +16,6 @@ public class Player
 		playerName = new String();
 		hand = new ArrayList<Card>();
 		laidDown = new ArrayList<Card>();
-		playerInput = new Scanner(System.in);
 	}
 
 	public int getPlayerID() 

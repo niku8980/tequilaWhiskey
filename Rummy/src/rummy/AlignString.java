@@ -1,3 +1,5 @@
+package rummy;
+
 public class AlignString 
 {
 	private String alignment;
@@ -22,7 +24,7 @@ public class AlignString
 	
 	public String format(String input)
 	{
-		String str = input.toString();
+		String str = input;
 		StringBuilder retString = new StringBuilder();
 		switch(alignment)
 		{
@@ -57,6 +59,8 @@ public class AlignString
 	protected final void pad(StringBuilder str, int paddingLength)
 	{
 		for(int i = 0; i < paddingLength; i++)
+		{
 			str.append(' ');
+		}
 	}
 }

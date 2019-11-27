@@ -1,3 +1,4 @@
+package rummy;
 import java.util.*;
 
 public class Game 
@@ -355,7 +356,7 @@ public class Game
 
 	{
 
-		// TODO: when the suite run runs the player can lay down as many cards as possible
+		// TODO: when the suite run runs the player can lay down as many cards as the player wants
 		// TODO: check if the cards laid down by player are a proper match or a proper suit run
 		
 		
