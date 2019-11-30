@@ -31,12 +31,12 @@ public class Game
 		scoreCap = 0;
 		players = new LinkedList<Player>();
 		playerInput = new Scanner(System.in);
-		leftJustifyPlayer = new AlignString(250, "LEFTPLAYER");
-		centerJustifyPlayer = new AlignString(250, "CENTERPLAYER");
-		rightJustifyPlayer = new AlignString(250, "RIGHTPLAYER");
-		rightJustifyCard = new AlignString(250, "RIGHTCARD");
-		leftJustifyCard = new AlignString(250, "LEFTCARD");
-		centerJustifyCard = new AlignString(250, "CENTERCARD");
+		leftJustifyPlayer = new AlignString(150, "LEFTPLAYER");
+		centerJustifyPlayer = new AlignString(150, "CENTERPLAYER");
+		rightJustifyPlayer = new AlignString(150, "RIGHTPLAYER");
+		rightJustifyCard = new AlignString(150, "RIGHTCARD");
+		leftJustifyCard = new AlignString(150, "LEFTCARD");
+		centerJustifyCard = new AlignString(150, "CENTERCARD");
 		discardPile = new ArrayList<Card>();
 		currentPlayer = new Player();
 	}
@@ -52,7 +52,10 @@ public class Game
 		
 		while(input != -1)
 		{				
-//				
+//		
+			System.out.println("Quit???");
+			input = playerInput.nextInt();
+			
 		//printStats();
 		displayTable();
 		displayOptions();
@@ -64,8 +67,7 @@ public class Game
 		nextTurn();
 
 		//clearConsole();
-		System.out.println("Quit???");
-		input = playerInput.nextInt();
+		
 		
 		System.out.println("=====================================================================================================================");
 		}
@@ -312,7 +314,6 @@ public class Game
 		}
 		else
 		{
-			System.out.println("in the else part");
 			drawFromDiscard(currentPlayer.hand);
 		}
 	}
@@ -344,64 +345,70 @@ public class Game
 			option = playerInput.nextInt();
 			if(option == 1)
 			{	
-				currentPlayer.laidDown.addAll(suitRun(currentPlayer.hand));
-				displayTable();
+				if(checkRun(currentPlayer.hand))
+				{	
+					currentPlayer.laidDown.addAll(suitRun(currentPlayer.hand));
+					displayTable();
+				}
+				else
+				{
+					System.out.println("A run is not possible with cards in your hand!");
+					displayTurn();
+				}
 			}
 			else
 				discard(currentPlayer.hand);
 		}while(option != 2);
 	}
-	
+
 	public ArrayList<Card> suitRun(ArrayList<Card> hand)
-
 	{
-
-		// TODO: when the suite run runs the player can lay down as many cards as the player wants
-		// TODO: check if the cards laid down by player are a proper match or a proper suit run
-		
-		
-		// TODO: still need to fix the display for 3 and 4 players
-		// TODO: and also sort the cards when the player picks up card from discard pile 
-		
-		ArrayList<Card> cards  = new ArrayList<Card>();
-		Card tempCard = new Card(-1);
+		int numberOfCards = 0;
 		int cardNumber = 0;
-		if(!checkRun(hand))
-		{	
-			System.out.println("There is no possible suit or set");
-			displayTurn();
-		}	
-		else
+		ArrayList<Card> runCards = new ArrayList<Card>();
+		
+		do
 		{
-			int numberOfCards = 0;
+			numberOfCards = 0;
+			cardNumber = 0;
+			runCards = new ArrayList<Card>();
 			do
 			{
-				System.out.println("Enter the number of cards you want to lay down: ");
+				System.out.print("Please enter the number of cards you want to lay down: " );
 				numberOfCards = playerInput.nextInt();
+				if(numberOfCards < 3)
+					System.out.println("Number of cards to be laid down must be more than 2");
 			}while(numberOfCards < 3);
-			
-			int tempn= numberOfCards;
-			while(numberOfCards != 0)
+
+			for(int i = 0; i < numberOfCards; i++)
 			{
-				System.out.println("Enter the card number: ");
-				cardNumber = (playerInput.nextInt())-1;
-				Card removeCard = hand.remove(cardNumber);
-				
-				hand.add(cardNumber, tempCard);
-				cards.add(removeCard);
-				numberOfCards--;
+				System.out.println("Enter card number: ");
+				cardNumber = playerInput.nextInt() - 1;
+				System.out.println("user input card number is: " + cardNumber + " card is: "+hand.get(cardNumber));
+				runCards.add(hand.get(cardNumber));
+			}
+			
+			if(checkRun(runCards))
+			{
+				System.out.println("A run is possible!");
+				for(Card c: runCards)
+				{
+					System.out.println("Removed card " + c.toString() + "from the hand");
+					hand.remove(c);
+				}
+				break;
+			}
+			
+			if(!checkRun(runCards))
+			{
+				System.out.println("A run not possible with given cards!");
 			}
 			
 			sortHand(hand);
 			
-			while(tempn != 0)
-			{
-					hand.remove(hand.get(0));
-					tempn--;
-			}
-		}
+		}while(!checkRun(runCards));
 		
-		return cards;
+		return runCards;
 	}
 	
 	public boolean checkRun(ArrayList<Card> hand)
@@ -564,6 +571,7 @@ public class Game
 		
 		clearConsole();
 		displayTable();
+		
 	}
 	
 	public void nextTurn()

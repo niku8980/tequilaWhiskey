@@ -1,14 +1,19 @@
 package rummy;
 public class Card {
 
-	public static final String[] RANKS = { null, " A", " 2", " 3", " 4", " 5", " 6", " 7", " 8", " 9", "10", " J", " Q",
-			" K"}; 
+	public static final String[] RANKS = { null, " A", " 2", " 3", " 4", " 5", " 6", " 7", " 8", " 9", "10", " J", " Q", "K"}; 
 
 	public static final String[] SUITS = { "C", "D", "H", "S" };
 	
+	public static final String[] JOKER= {"JOKER"}; 
+
+	public static final String[] JKR = { "JOKERRR" };
+
+	
 	int rank;
 	int suit;
-
+	int jokerCard;
+	
 	public Card(int rank, int suit) {
 		this.rank = rank;
 		this.suit = suit;
@@ -16,10 +21,9 @@ public class Card {
 	
 	public Card(int rank)
 	{
-		this.rank = rank;
-		this.suit = rank;
+		jokerCard = rank;
 	}
-
+	
 	public int getRank() {
 		return rank ;
 	}
@@ -37,6 +41,6 @@ public class Card {
 	}
 
 	public String toString() {
-			return RANKS[this.rank] + " " + SUITS[this.suit];
+		return RANKS[this.rank] + " " + SUITS[this.suit];
 	}
 }
