@@ -15,7 +15,6 @@ public class AlignString
 		case "LEFTCARD":
 		case "RIGHTCARD":
 		case "CENTERCARD":
-		case "CENTERCASE":
 			this.alignment = alignment;
 			this.stringLength = stringLength;
 			break;
@@ -29,17 +28,18 @@ public class AlignString
 		switch(alignment)
 		{
 			case "CENTERPLAYER" :
-				pad(retString, (stringLength)/2);
+				pad(retString, (stringLength)/2 - 24);
 				retString.append(str);
-				pad(retString, (stringLength)/2);
+				pad(retString, (stringLength)/2 - input.length());
 				break;
 			case "CENTERCARD":
-				pad(retString, (stringLength)/2);
+				pad(retString, (stringLength)/2- 24);
 				retString.append(str + " ");
 				break;
 			case "LEFTPLAYER" :
 				retString.append(str);
 				pad(retString, stringLength - str.length());
+				break;
 			case "LEFTCARD":
 				retString.append(str + " ");
 				break;
