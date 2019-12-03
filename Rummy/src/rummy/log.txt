@@ -1,0 +1,268 @@
+in finction welcome screen
+	Welcome to the rummy: 
+	This game could be played by upto 4: 
+
+	Okay! Enough of it. lets dive in setting up the game...
+in finction get game info
+
+	Can you please enter number of players: 	How about the score cap: 	Alright! Now lets set up players profile...
+
+in finction setup players
+	Please enter player 1's name : 	Please enter player 2's name : 
+in finction distribute cards
+in finction display table
+in finction Display table
+in finction display table for two players
+in finction print player info center
+                                                                            2.  2                                                                                               
+                                                                            2's score: 0                                                                                        
+
+                                                                            Laid down cards:                                                                                    
+
+in finction print deck and discard
+
+                                                                            ========================                                                                            
+                                                                            |  Deck: | X |         |                                                                            
+                                                                            |  Deck has 33 card(s) |                                                                            
+                                                                            |                      |                                                                            
+                                                                            |  Discarded Cards:    |                                                                            
+                                                                            ========================                                                                            
+
+
+in finction print current player inofo
+                                                                            1.  1                                                                                               
+                                                                            1's score: 0                                                                                        
+
+                                                                            Laid down cards:                                                                                    
+
+
+                                                                            Cards in hand:                                                                                      
+
+in finction sort hand
+                                                                            1....|  2 S  |  
+                                                                            2....|  2 H  |  
+                                                                            3....|  3 H  |  
+                                                                            4....|  5 C  |  
+                                                                            5....|  6 C  |  
+                                                                            6....|  7 D  |  
+                                                                            7....|  8 H  |  
+                                                                            8....| 10 H  |  
+                                                                            9....| 10 S  |  
+                                                                            10...|  Q C  |  
+in finction display options
+
+1.  Pick up from Deck.
+2.  Pick up from discard pile.
+in finction draw
+in finction sort hand
+in finction clear console
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+in finction Display table
+in finction display table for two players
+in finction print player info center
+                                                                            2.  2                                                                                               
+                                                                            2's score: 0                                                                                        
+
+                                                                            Laid down cards:                                                                                    
+
+in finction print deck and discard
+
+                                                                            ========================                                                                            
+                                                                            |  Deck: | X |         |                                                                            
+                                                                            |  Deck has 32 card(s) |                                                                            
+                                                                            |                      |                                                                            
+                                                                            |  Discarded Cards:    |                                                                            
+                                                                            ========================                                                                            
+
+
+in finction print current player inofo
+                                                                            1.  1                                                                                               
+                                                                            1's score: 0                                                                                        
+
+                                                                            Laid down cards:                                                                                    
+
+
+                                                                            Cards in hand:                                                                                      
+
+in finction sort hand
+                                                                            1....|  2 S  |  
+                                                                            2....|  2 H  |  
+                                                                            3....|  3 H  |  
+                                                                            4....|  5 C  |  
+                                                                            5....|  6 C  |  
+                                                                            6....|  7 D  |  
+                                                                            7....|  8 H  |  
+                                                                            8....| 10 H  |  
+                                                                            9....| 10 S  |  
+                                                                            10...|  Q C  |  
+                                                                            11...|  K D  |  
+
+in finction display turn
+
+1. Make a run.
+2.  Discard a card.
+in finction is run
+in finction sort hand
+in finction sort hand
+in finction sort hand
+in finction sort hand
+in finction sort hand
+in finction sort hand
+in finction sort hand
+in finction sort hand
+in finction sort hand
+in finction sort hand
+in finction sort hand
+A run is not possible with cards in your hand!
+
+1. Make a run.
+2.  Discard a card.
+in finction discard
+Choose a card to discard: in finction next turn
+in finction clear console
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+=====================================================================================================================
+Heighest score: 0
+Score cap: 50
+in finction display table
+in finction Display table
+in finction display table for two players
+in finction print player info center
+                                                                            1.  1                                                                                               
+                                                                            1's score: 0                                                                                        
+
+                                                                            Laid down cards:                                                                                    
+
+in finction print deck and discard
+
+                                                                            ========================                                                                            
+                                                                            |  Deck: | X |         |                                                                            
+                                                                            |  Deck has 32 card(s) |                                                                            
+                                                                            |                      |                                                                            
+                                                                            |  Discarded Cards:    |                                                                            
+                                                                            |  1....|  2 S  |      |  
+                                                                            ========================                                                                            
+
+
+in finction print current player inofo
+                                                                            2.  2                                                                                               
+                                                                            2's score: 0                                                                                        
+
+                                                                            Laid down cards:                                                                                    
+
+
+                                                                            Cards in hand:                                                                                      
+
+in finction sort hand
+                                                                            1....|  A D  |  
+                                                                            2....|  2 D  |  
+                                                                            3....|  2 C  |  
+                                                                            4....|  3 C  |  
+                                                                            5....|  6 H  |  
+                                                                            6....|  6 D  |  
+                                                                            7....|  7 C  |  
+                                                                            8....|  7 H  |  
+                                                                            9....|  8 D  |  
+                                                                            10...|  J S  |  
+in finction display options
+
+1.  Pick up from Deck.
+2.  Pick up from discard pile.
