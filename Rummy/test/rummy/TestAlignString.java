@@ -6,8 +6,8 @@ import org.junit.*;
 
 /**
  * This class test the AlignString class and its functions.
- * @author niasp
- *
+ * @author Brandon Staton, Dillon Kilroy, Nikunj Patel
+ * @version 1.0
  */
 
 public class TestAlignString {
@@ -31,7 +31,7 @@ public class TestAlignString {
 	@Before
 	public void init()
 	{
-		string = "testCase";									// string length = 9, including the '\0'
+		string = "testCase";									// string length = 8
 		leftPlayer = new AlignString(50, "LEFTPLAYER");			// the length of the entire line = 50
 		centerPlayer =  new AlignString(50, "CENTERPLAYER");
 		rightPlayer = new AlignString(50, "RIGHTPLAYER");

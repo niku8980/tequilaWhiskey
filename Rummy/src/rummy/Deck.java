@@ -97,33 +97,33 @@ public class Deck {
 		return deck.size();
 	}
 	
-	/**
-	 * 
-	 */
-	
-	public String toString() {
-		String s = new String();
-		int k = 0;
-
-		for (int i = 0; i < 4; i++) {
-			for (int j = 1; j <= 13; j++) {
-				s += (deck.get(k++) + " ");
-				s += "\n";
-			}
-			s += "\n";
-		}
-		return (s);
-	}
-	
-	/**
-	 * This function prints out all the cards in the deck.
-	 */
-	
-	public void printDeck()
-	{
-		for(Card c: deck)
-		{
-			System.out.print(c.toString() + " ");
-		}
-	}
+//	/**
+//	 * returns
+//	 */
+//	
+//	/*public String toString() {
+//		String s = new String();
+//		int k = 0;
+//
+//		for (int i = 0; i < 4; i++) {
+//			for (int j = 1; j <= 13; j++) {
+//				s += (deck.get(k++) + " ");
+//				s += "\n";
+//			}
+//			s += "\n";
+//		}
+//		return (s);
+//	}
+//	
+//	/**
+//	 * This function prints out all the cards in the deck.
+//	 */
+//	/*
+//	public void printDeck()
+//	{
+//		for(Card c: deck)
+//		{
+//			System.out.print(c.toString() + " ");
+//		}
+//	}*/*/
 }

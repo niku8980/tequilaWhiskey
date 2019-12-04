@@ -56,6 +56,8 @@ public class Game {
 	 * 
 	 */
 
+	static boolean done = true;
+	
 	static Deck shuffledDeck = new Deck();
 	static Player currentPlayer;
 
@@ -127,18 +129,44 @@ public class Game {
 	 */
 
 	public void getGameInfo() {
-		System.out.print("\n\tCan you please enter number of players: ");
-		numberOfPlayers = playerInput.nextInt();
-
-		while (numberOfPlayers > 4 || numberOfPlayers < 2) {
-			System.out.println("\tWooooowooow!!! Players must be between 2 - 4...");
-			System.out.print("1\tCan you please enter number of players: ");
-			numberOfPlayers = playerInput.nextInt();
-		}
-
-		System.out.print("\tHow about the score cap: ");
-		scoreCap = playerInput.nextInt();
-
+		do
+		{
+			try
+			{
+				System.out.print("\n\tCan you please enter number of players 2 - 4: ");
+				numberOfPlayers = playerInput.nextInt();
+				if(numberOfPlayers>4 || numberOfPlayers<2) {
+					throw new InputMismatchException("Wrong number of Players");
+				}
+				done = false;
+			}
+			catch (InputMismatchException e)
+			{
+				System.out.println("\tWrong input!");
+				numberOfPlayers = 0;
+			}
+			playerInput.nextLine();
+		}while(done);	
+		
+		done = true;
+		do
+		{
+			try 
+			{
+				System.out.print("\tHow about the score cap: ");
+				scoreCap = playerInput.nextInt();
+				if(scoreCap < 0)
+					throw new InputMismatchException("Score too low!");
+				done = false;
+					
+			}
+			catch(InputMismatchException e)
+			{
+				System.out.println("\tWrong input!");
+			}
+			playerInput.nextLine();			
+		}while(done);
+		
 		System.out.println("\tAlright! Now lets set up players profile...\n");
 	}
 
@@ -387,16 +415,32 @@ public class Game {
 	 */
 
 	public void displayOptions() {
+		done = true;
 		int option = 0;
-		System.out.println("\n1.  Pick up from Deck.");
-		System.out.println("2.  Pick up from discard pile.");
-		option = playerInput.nextInt();
-		if (option == 1) {
-			draw(currentPlayer.hand);
-			System.out.println();
-		} else {
-			drawFromDiscard(currentPlayer.hand);
-		}
+		do
+		{
+			try
+			{
+				System.out.println("\n1.  Pick up from Deck.");
+				System.out.println("2.  Pick up from discard pile.");
+				option = playerInput.nextInt();
+				if(option < 1 || option > 2)
+					throw new InputMismatchException("Wrong Input!");
+				done = false;
+			}
+			catch(InputMismatchException e)
+			{
+				System.out.println("Wrong input");
+				option = 0;
+			}
+			playerInput.nextLine();
+		}while(done);
+				if (option == 1) {
+				draw(currentPlayer.hand);
+				System.out.println();
+			} else {
+				drawFromDiscard(currentPlayer.hand);
+			}
 	}
 
 	/**
@@ -432,11 +476,29 @@ public class Game {
 	public void displayTurn() {
 		int option = 0;
 		int oldSize = 0, newSize = 0;
+		done = true;
 		do
 		{
-			System.out.println("\n1. Make a run.");
-			System.out.println("2.  Discard a card.");
-			option = playerInput.nextInt();
+			do
+			{
+				try
+				{
+					System.out.println("\n1. Make a run.");
+					System.out.println("2.  Discard a card.");
+					option = playerInput.nextInt();
+					if(option < 1 || option > 2)
+						throw new InputMismatchException("Wrong input");
+					done = false;
+				}
+				catch(InputMismatchException e)
+				{
+					System.out.println("Wrong Input");
+					option = 0;
+				}
+				playerInput.nextLine();
+				
+			}while(done);
+			
 			if (option == 1) 
 			{
 				if (isRun(currentPlayer.hand)) {
@@ -469,16 +531,32 @@ public class Game {
 		int numberOfCards = 0;
 		int cardNumber = 0;
 		ArrayList<Card> runCards = new ArrayList<Card>();
-
+		done = true;
+		
 		do {
 			numberOfCards = 0;
 			cardNumber = 0;
 			runCards = new ArrayList<Card>();
 			int option = 0;
-			System.out.println("1.  Do a match run.");
-			System.out.println("2.  Do a suit run.");
-			System.out.print("Input: ");
-			option = playerInput.nextInt();
+			do
+			{
+				try
+				{
+					System.out.println("1.  Do a match run.");
+					System.out.println("2.  Do a suit run.");
+					option = playerInput.nextInt();
+					if(option > 2 || option < 1)
+						throw new InputMismatchException();
+					done = false;
+				}
+				catch(InputMismatchException e)
+				{
+					System.out.println("Wrong input");
+					option = 0;
+				}
+				playerInput.nextLine();
+			}while(done);
+			
 			do {
 				System.out.print("Please enter the number of cards you want to lay down: ");
 				numberOfCards = playerInput.nextInt();
@@ -486,8 +564,11 @@ public class Game {
 					System.out.println("Number of cards to be laid down must be more than 2");
 			} while (numberOfCards < 3);
 
-			for (int i = 0; i < numberOfCards; i++) {
-				System.out.println("Enter card number: ");
+			for (int i = 0; i < numberOfCards; i++) 
+			{
+				try
+				{
+					System.out.println("Enter card number: ");
 				cardNumber = playerInput.nextInt() - 1;
 				runCards.add(hand.get(cardNumber));
 			}
