@@ -49,33 +49,32 @@ public class AlignString
 	
 	public String format(String input)
 	{
-		String str = input;
 		StringBuilder retString = new StringBuilder();
 		switch(alignment)
 		{
 			case "CENTERPLAYER" :
 				pad(retString, (stringLength)/2 - 24);
-				retString.append(str);
+				retString.append(input);
 				pad(retString, (stringLength)/2 - input.length());
 				break;
 			case "CENTERCARD":
 				pad(retString, (stringLength)/2- 24);
-				retString.append(str + " ");
+				retString.append(input + " ");
 				break;
 			case "LEFTPLAYER" :
-				retString.append(str);
-				pad(retString, stringLength - str.length());
+				retString.append(input);
+				pad(retString, stringLength - input.length());
 				break;
 			case "LEFTCARD":
-				retString.append(str + " ");
+				retString.append(input + " ");
 				break;
 			case "RIGHTPLAYER": 
 				pad(retString, stringLength - 50);
-				retString.append(str);
+				retString.append(input);
 				break;				
 			case "RIGHTCARD":
 				pad(retString, stringLength - 50);
-				retString.append(str);
+				retString.append(input);
 				break;
 		}	
 		retString.append("\n");  

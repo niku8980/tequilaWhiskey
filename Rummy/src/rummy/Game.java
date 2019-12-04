@@ -297,7 +297,6 @@ public class Game {
 		String playerName = p.getPlayerName();
 		System.out.print(centerJustifyPlayer.format((playerID) + ".  " + playerName));
 		System.out.println(centerJustifyPlayer.format(p.getPlayerName() + "'s score: " + p.getPlayerScore()));
-//		System.out.println();
 		System.out.println(centerJustifyPlayer.format("Laid down cards: "));
 		int i = 1;
 		for (Card c : p.laidDown) {
@@ -326,14 +325,12 @@ public class Game {
 	public void displayTableForThreePlayers()
 
 	{
-		// players.add(players.poll());
 		players.add(players.poll());
 
 		currentPlayer = players.peek();
 
 		printPlayerInfoLeft(currentPlayer);
 
-		// players.add(players.poll());
 		players.add(players.poll());
 
 		currentPlayer = players.peek();
@@ -342,7 +339,6 @@ public class Game {
 
 		printDeckAndDiscard();
 
-		// players.add(players.poll());
 		players.add(players.poll());
 
 		currentPlayer = players.peek();
@@ -439,7 +435,6 @@ public class Game {
 		do
 		{
 			System.out.println("\n1. Make a run.");
-			// System.out.println("2. Follow a run");
 			System.out.println("2.  Discard a card.");
 			option = playerInput.nextInt();
 			if (option == 1) 
@@ -545,6 +540,12 @@ public class Game {
 		return true;
 	}
 
+	/**
+	 * This function specifically checks for a Suit run.
+	 * @param hand The cards which are checked to see if there is a possible run.
+	 * @return True if there is a possible run, false otherwise.
+	 */
+	
 	public boolean checkSuitRun(ArrayList<Card> hand) {
 
 		for (int i = 0; i < hand.size() - 2; i++) {
@@ -556,68 +557,53 @@ public class Game {
 				return false;
 		}
 
-		boolean check1 = false;
-		boolean check2 = true;
 		ArrayList<Card> clubCards = new ArrayList<Card>();
 		ArrayList<Card> spadeCards = new ArrayList<Card>();
 		ArrayList<Card> diamondCards = new ArrayList<Card>();
 		ArrayList<Card> heartCards = new ArrayList<Card>();
 
+		// sort all the cards as per the suit and store them in specific ArrayLists
+		// and sort all the ArrayLists
+		
 		for (Card c : hand) {
-			if (c.getSuit() == 0) // add club cards to arraylist
+			if (c.getSuit() == 0) // add club cards to ArrayList 
 			{
 				clubCards.add(c);
 				sortHand(clubCards);
-			} else if (c.getSuit() == 1) // add all diamond cards to the arraylist
+			} else if (c.getSuit() == 1) // add all diamond cards to the ArrayList
 			{
 				diamondCards.add(c);
 				sortHand(diamondCards);
-			} else if (c.getSuit() == 2) // add all heart cards to the arraylist
+			} else if (c.getSuit() == 2) // add all heart cards to the ArrayList
 			{
 				heartCards.add(c);
 				sortHand(heartCards);
-			} else // add all spade cards to the arraylist
+			} else // add all spade cards to the ArrayList
 			{
 				spadeCards.add(c);
 				sortHand(spadeCards);
 			}
 		}
 
+		// there is a run only if there are more than 2 cards of a certail suit
+		// so the check made to ensure that there are more than 2 cards
+		// if not skip to the next one
+		
 		if (clubCards.size() > 2) {
 			for (int i = 0; i < clubCards.size() - 2; i++) {
 				if ((clubCards.get(i + 1).getRank() - clubCards.get(i).getRank()) != 1
 						|| (clubCards.get(i + 2).getRank() - clubCards.get(i).getRank()) != 2)
 					return false;
 			}
-
-//			if(check1)
-//			{
-//				for(int i = 0; i < hand.size()-1; i++)
-//				{
-//					if(hand.get(i).getSuit() != hand.get(i + 1).getSuit())
-//						check2 = false;
-//				}
-//			}	
 		}
 
-		if (diamondCards.size() > 2) {
+		if (diamondCards.size() > 2) 
+		{
 			for (int i = 0; i < diamondCards.size() - 2; i++) {
 				if ((diamondCards.get(i + 1).getRank() - diamondCards.get(i).getRank()) != 1
 						|| (diamondCards.get(i + 2).getRank() - diamondCards.get(i).getRank()) != 2)
 					return false;
 			}
-
-//			if(check1)
-//			{
-//				for(int i = 0; i < hand.size()-1; i++)
-//				{
-//					if(hand.get(i).getSuit() != hand.get(i + 1).getSuit())
-//						check2 = false;
-//				}
-//			}	
-//			
-//			if(check2)
-//				return true;
 		}
 
 		if (heartCards.size() > 2) {
@@ -626,18 +612,6 @@ public class Game {
 						|| (heartCards.get(i + 2).getRank() - heartCards.get(i).getRank()) != 2)
 					return false;
 			}
-
-//			if(check1)
-//			{
-//				for(int i = 0; i < hand.size()-1; i++)
-//				{
-//					if(hand.get(i).getSuit() != hand.get(i + 1).getSuit())
-//						check2 = false;
-//				}
-//			}	
-//			
-//			if(check2)
-//				return true;
 		}
 
 		if (spadeCards.size() > 2) {
@@ -646,31 +620,34 @@ public class Game {
 						|| (spadeCards.get(i + 2).getRank() - spadeCards.get(i).getRank()) != 2)
 					return false;
 			}
-			/*
-			 * if(check1) { for(int i = 0; i < hand.size()-1; i++) {
-			 * if(hand.get(i).getSuit() != hand.get(i + 1).getSuit()) check2 = false; } }
-			 * 
-			 * if(check2) return true;
-			 */
 		}
 
 		return true;
 	}
 
-	public boolean isRun(ArrayList<Card> hand) {
-		// match run check
-		for (int i = 0; i < hand.size() - 2; i++) {
+	/**
+	 * This functions makes sure that the cards picked up by the player 
+	 * from the discard pile make a run. If there is no possible run
+	 * from the cards picked up from the discard pile and the cards in 
+	 * players hand than the function returns false, true otherwise. 
+	 * @param hand The hand of the player with chosen cards from the discard pile
+	 * @return True if the hand makes a successful run, false otherwise.
+	 */
+	
+	public boolean isRun(ArrayList<Card> hand) 
+	{
+		
+		// check for a match run 
+		
+		for (int i = 0; i < hand.size() - 2; i++) 
+		{
 			if (hand.get(i).getRank() == hand.get(i + 1).getRank()) {
 				if (hand.get(i).getRank() == hand.get(i + 2).getRank())
 					return true;
-//				else
-//					return false;
 			}
-//			else
-//				return false;
 		}
-
-		// suit run check
+		
+		// check for a suit run 
 
 		ArrayList<Card> clubCards = new ArrayList<Card>();
 		ArrayList<Card> spadeCards = new ArrayList<Card>();
@@ -678,85 +655,62 @@ public class Game {
 		ArrayList<Card> heartCards = new ArrayList<Card>();
 
 		for (Card c : hand) {
-			if (c.getSuit() == 0) // add club cards to arraylist
+			if (c.getSuit() == 0) // add club cards to ArrayList
 			{
 				clubCards.add(c);
 				sortHand(clubCards);
-			} else if (c.getSuit() == 1) // add all diamond cards to the arraylist
+			} else if (c.getSuit() == 1) // add all diamond cards to the ArrayList
 			{
 				diamondCards.add(c);
 				sortHand(diamondCards);
-			} else if (c.getSuit() == 2) // add all heart cards to the arraylist
+			} else if (c.getSuit() == 2) // add all heart cards to the ArrayList
 			{
 				heartCards.add(c);
 				sortHand(heartCards);
-			} else // add all spade cards to the arraylist
+			} else // add all spade cards to the ArrayList
 			{
 				spadeCards.add(c);
 				sortHand(spadeCards);
 			}
 		}
 
-		if (clubCards.size() > 2) {
-			for (int i = 0; i < clubCards.size() - 2; i++) {
+		if (clubCards.size() > 2)
+		{
+			for (int i = 0; i < clubCards.size() - 2; i++) 
+			{
 				if ((clubCards.get(i + 1).getRank() - clubCards.get(i).getRank()) == 1)
 					if ((clubCards.get(i + 2).getRank() - clubCards.get(i).getRank()) == 2)
 						return true;
-//						check1 = true;
 			}
-			/*
-			 * if(check1) { for(int i = 0; i < hand.size()-1; i++) {
-			 * if(hand.get(i).getSuit() != hand.get(i + 1).getSuit()) check2 = false; } }
-			 * 
-			 * if(check2) return true;
-			 */
-
 		}
-
-		if (diamondCards.size() > 2) {
-			for (int i = 0; i < diamondCards.size() - 2; i++) {
+		if (diamondCards.size() > 2) 
+		{
+			for (int i = 0; i < diamondCards.size() - 2; i++) 
+			{
 				if ((diamondCards.get(i + 1).getRank() - diamondCards.get(i).getRank()) == 1)
 					if ((diamondCards.get(i + 2).getRank() - diamondCards.get(i).getRank()) == 2)
-						// check1 = true;
 						return true;
 			}
-
-			/*
-			 * if(check1) { for(int i = 0; i < hand.size()-1; i++) {
-			 * if(hand.get(i).getSuit() != hand.get(i + 1).getSuit()) check2 = false; } }
-			 * 
-			 * if(check2) return true;
-			 */
 		}
 
-		if (heartCards.size() > 2) {
-			for (int i = 0; i < heartCards.size() - 2; i++) {
+		if (heartCards.size() > 2) 
+		{
+			for (int i = 0; i < heartCards.size() - 2; i++) 
+			{
 				if ((heartCards.get(i + 1).getRank() - heartCards.get(i).getRank()) == 1)
 					if ((heartCards.get(i + 2).getRank() - heartCards.get(i).getRank()) == 2)
 						return true;
-				// check1 = true;
 			}
-			/*
-			 * if(check1) { for(int i = 0; i < hand.size()-1; i++) {
-			 * if(hand.get(i).getSuit() != hand.get(i + 1).getSuit()) check2 = false; } }
-			 * 
-			 * if(check2) return true;
-			 */
 		}
 
-		if (spadeCards.size() > 2) {
-			for (int i = 0; i < spadeCards.size() - 2; i++) {
+		if (spadeCards.size() > 2) 
+		{
+			for (int i = 0; i < spadeCards.size() - 2; i++) 
+			{
 				if ((spadeCards.get(i + 1).getRank() - spadeCards.get(i).getRank()) == 1)
 					if ((spadeCards.get(i + 2).getRank() - spadeCards.get(i).getRank()) == 2)
-						// check1 = true;
 						return true;
 			}
-			/*
-			 * if(check1) { for(int i = 0; i < hand.size()-1; i++) {
-			 * if(hand.get(i).getSuit() != hand.get(i + 1).getSuit()) check2 = false; } }
-			 * 
-			 * if(check2) return true;
-			 */
 		}
 
 		return false;
@@ -792,9 +746,6 @@ public class Game {
 		num = playerInput.nextInt();
 
 		discardPile.add(hand.remove(num - 1));
-//		if(heighestScore >= scoreCap)
-//			return;
-//		nextTurn();
 	}
 
 	/**
@@ -828,11 +779,12 @@ public class Game {
 		}
 
 		for (int i = cardNumber; i < discardPile.size(); i++) {
-			tempHand.add(discardPile.get(cardNumber));
+			tempHand.add(discardPile.get(i));
 		}
-
+		
 		int temp = cardNumber;
 		sortHand(tempHand);
+
 		if (!isRun(tempHand)) {
 			clearConsole();
 			displayTable();
@@ -857,9 +809,7 @@ public class Game {
 
 	}
 
-	/**
-	 * This function changes the turn.
-	 */
+	
 
 	/*
 	 * public void followRun(ArrayList<Card> hand) { int playerID = 0, upperBound =
@@ -902,6 +852,10 @@ public class Game {
 	 * } }
 	 */
 
+	/**
+	 * This function changes the turn.
+	 */
+	
 	public void nextTurn() {
 		clearConsole();
 		players.add(players.poll());
@@ -915,12 +869,6 @@ public class Game {
 			System.out.println("New round to commence!");
 			resetGame();
 		}
-
-//		displayTable();
-//		displayOptions();
-//		System.out.println("---------------------------------------------------------------------------------------------------------------------");
-//		displayTurn();
-
 	}
 
 	/**
