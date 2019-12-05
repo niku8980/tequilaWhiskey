@@ -57,19 +57,19 @@ public class Game {
 	 */
 
 	static boolean done = true;
-	
+
 	static Deck shuffledDeck = new Deck();
 	static Player currentPlayer;
 
-	AlignString leftJustifyPlayer;
+	//AlignString leftJustifyPlayer;
 	AlignString centerJustifyPlayer;
 	AlignString rightJustifyPlayer;
-	AlignString leftJustifyCard;
+	//AlignString leftJustifyCard;
 	AlignString centerJustifyCard;
 	AlignString rightJustifyCard;
 
 	/**
-	 * The constructer creates a game.
+	 * The constructor creates a game.
 	 */
 
 	public Game() {
@@ -78,11 +78,11 @@ public class Game {
 		heighestScore = 0;
 		players = new LinkedList<Player>();
 		playerInput = new Scanner(System.in);
-		leftJustifyPlayer = new AlignString(200, "LEFTPLAYER");
+		//leftJustifyPlayer = new AlignString(200, "LEFTPLAYER");
 		centerJustifyPlayer = new AlignString(200, "CENTERPLAYER");
 		rightJustifyPlayer = new AlignString(200, "RIGHTPLAYER");
 		rightJustifyCard = new AlignString(200, "RIGHTCARD");
-		leftJustifyCard = new AlignString(200, "LEFTCARD");
+		//leftJustifyCard = new AlignString(200, "LEFTCARD");
 		centerJustifyCard = new AlignString(200, "CENTERCARD");
 		discardPile = new ArrayList<Card>();
 		currentPlayer = new Player();
@@ -97,21 +97,15 @@ public class Game {
 		distributeCards();
 
 		while (heighestScore <= scoreCap) {
-			System.out.println("begining of while loop");
 			displayTable();
 			displayOptions();
 			displayTurn();
 			nextTurn();
 			clearConsole();
-			
-			System.out.println(
-					"=====================================================================================================================");
-			System.out.println("Heighest score: " + heighestScore);
-			System.out.println("Score cap: " + scoreCap);
-			System.out.println("end of while loop");
 		}
 
 		System.out.println("The game has ended!!");
+		
 	}
 
 	/**
@@ -129,44 +123,36 @@ public class Game {
 	 */
 
 	public void getGameInfo() {
-		do
-		{
-			try
-			{
+		do {
+			try {
 				System.out.print("\n\tCan you please enter number of players 2 - 4: ");
 				numberOfPlayers = playerInput.nextInt();
-				if(numberOfPlayers>4 || numberOfPlayers<2) {
-					throw new InputMismatchException("Wrong number of Players");
+				if (numberOfPlayers > 4 || numberOfPlayers < 2) {
+					throw new InputMismatchException("/tWrong number of Players");
 				}
 				done = false;
-			}
-			catch (InputMismatchException e)
-			{
-				System.out.println("\tWrong input!");
+			} catch (InputMismatchException e) {
+				System.out.println("\tInvalid input!");
 				numberOfPlayers = 0;
 			}
 			playerInput.nextLine();
-		}while(done);	
-		
+		} while (done);
+
 		done = true;
-		do
-		{
-			try 
-			{
+		do {
+			try {
 				System.out.print("\tHow about the score cap: ");
 				scoreCap = playerInput.nextInt();
-				if(scoreCap < 0)
-					throw new InputMismatchException("Score too low!");
+				if (scoreCap < 0)
+					throw new InputMismatchException("/tScore too low!");
 				done = false;
-					
+
+			} catch (InputMismatchException e) {
+				System.out.println("\tInvalid input!");
 			}
-			catch(InputMismatchException e)
-			{
-				System.out.println("\tWrong input!");
-			}
-			playerInput.nextLine();			
-		}while(done);
-		
+			playerInput.nextLine();
+		} while (done);
+
 		System.out.println("\tAlright! Now lets set up players profile...\n");
 	}
 
@@ -231,6 +217,7 @@ public class Game {
 	 */
 
 	public void displayTable() {
+		clearConsole();
 		if (numberOfPlayers == 2)
 			displayTableForTwoPlayers();
 		else if (numberOfPlayers == 3)
@@ -266,8 +253,8 @@ public class Game {
 		int playerID = p.getPlayerID() + 1;
 		String playerName = p.getPlayerName();
 		System.out.print(centerJustifyPlayer.format((playerID) + ".  " + playerName));
-		System.out.println(centerJustifyPlayer.format(p.getPlayerName() + "'s score: " + p.getPlayerScore()));
-		System.out.println(centerJustifyPlayer.format("Laid down cards: "));
+		System.out.print(centerJustifyPlayer.format(p.getPlayerName() + "'s score: " + p.getPlayerScore()));
+		System.out.print(centerJustifyPlayer.format("Laid down cards: "));
 		int i = 1;
 		for (Card c : p.laidDown) {
 			if (i < 10)
@@ -286,8 +273,8 @@ public class Game {
 		int playerID = p.getPlayerID() + 1;
 		String playerName = p.getPlayerName();
 		System.out.print(rightJustifyPlayer.format((playerID) + ".  " + playerName));
-
-		System.out.println(rightJustifyPlayer.format("Laid down"));
+		System.out.print(rightJustifyPlayer.format(p.getPlayerName() + "'s score: " + p.getPlayerScore()));
+		System.out.print(rightJustifyPlayer.format("Laid down cards: "));
 		int i = 1;
 		for (Card c : p.laidDown) {
 			System.out.print(rightJustifyCard.format(i + ".  | " + c.toString() + "  | "));
@@ -304,12 +291,12 @@ public class Game {
 	public void printPlayerInfoLeft(Player p) {
 		int playerID = p.getPlayerID() + 1;
 		String playerName = p.getPlayerName();
-		System.out.print(leftJustifyPlayer.format((playerID) + ".  " + playerName));
-		System.out.println(leftJustifyPlayer.format(p.getPlayerName() + "'s score: " + p.getPlayerScore()));
-		System.out.println(leftJustifyPlayer.format("Laid down"));
+		System.out.println(playerID + ".  " + playerName);
+		System.out.println(p.getPlayerName() + "'s score: " + p.getPlayerScore());
+		System.out.println("Laid down cards: ");
 		int i = 1;
 		for (Card c : p.laidDown) {
-			System.out.print(leftJustifyCard.format(i + ".  | " + c.toString() + "  | "));
+			System.out.println(i + ".  | " + c.toString() + "  | ");
 			i++;
 		}
 	}
@@ -324,8 +311,8 @@ public class Game {
 		int playerID = p.getPlayerID() + 1;
 		String playerName = p.getPlayerName();
 		System.out.print(centerJustifyPlayer.format((playerID) + ".  " + playerName));
-		System.out.println(centerJustifyPlayer.format(p.getPlayerName() + "'s score: " + p.getPlayerScore()));
-		System.out.println(centerJustifyPlayer.format("Laid down cards: "));
+		System.out.print(centerJustifyPlayer.format(p.getPlayerName() + "'s score: " + p.getPlayerScore()));
+		System.out.print(centerJustifyPlayer.format("Laid down cards: "));
 		int i = 1;
 		for (Card c : p.laidDown) {
 			System.out.print(centerJustifyCard.format(i + ".  | " + c.toString() + "  | "));
@@ -417,30 +404,28 @@ public class Game {
 	public void displayOptions() {
 		done = true;
 		int option = 0;
-		do
-		{
-			try
-			{
+		do {
+			try {
 				System.out.println("\n1.  Pick up from Deck.");
 				System.out.println("2.  Pick up from discard pile.");
+				System.out.print("Your input: ");
 				option = playerInput.nextInt();
-				if(option < 1 || option > 2)
-					throw new InputMismatchException("Wrong Input!");
+				if (option < 1 || option > 2)
+					throw new InputMismatchException();
 				done = false;
-			}
-			catch(InputMismatchException e)
-			{
-				System.out.println("Wrong input");
+			} catch (InputMismatchException e) {
+				System.out.println("Invalid input!");
 				option = 0;
 			}
 			playerInput.nextLine();
-		}while(done);
-				if (option == 1) {
-				draw(currentPlayer.hand);
-				System.out.println();
-			} else {
-				drawFromDiscard(currentPlayer.hand);
-			}
+		} while (done);
+		if (option == 1) {
+			
+			draw(currentPlayer.hand);
+			System.out.println();
+		} else {
+			drawFromDiscard(currentPlayer.hand);
+		}
 	}
 
 	/**
@@ -448,10 +433,19 @@ public class Game {
 	 */
 
 	public void printDeckAndDiscard() {
-		System.out.println();
+		if(shuffledDeck.size() < 5)
+		{	
+			System.out.print(centerJustifyPlayer.format("Note: Less than 5 cards remaining in the deck."));
+			System.out.println(centerJustifyPlayer.format("The cards will be reshuffled and be dealt to players"));
+			if(shuffledDeck.size() == 1)
+				System.out.println(centerJustifyPlayer.format("Last turn. New round to commence"));
+		}
 		System.out.print(centerJustifyPlayer.format("========================"));
 		System.out.print(centerJustifyPlayer.format("|  Deck: | X |         |"));
-		System.out.print(centerJustifyPlayer.format("|  Deck has " + (shuffledDeck.size() + 1) + " card(s) |"));
+		if(shuffledDeck.size() + 1 < 10)
+			System.out.print(centerJustifyPlayer.format("|  Deck has " + (shuffledDeck.size() + 1) + " card(s)  |"));
+		else
+			System.out.print(centerJustifyPlayer.format("|  Deck has " + (shuffledDeck.size() + 1) + " card(s) |"));
 		System.out.print(centerJustifyPlayer.format("|                      |"));
 		System.out.print(centerJustifyPlayer.format("|  Discarded Cards:    |"));
 
@@ -465,8 +459,6 @@ public class Game {
 			i++;
 		}
 		System.out.print(centerJustifyPlayer.format("========================"));
-
-		System.out.println("\n");
 	}
 
 	/**
@@ -477,30 +469,25 @@ public class Game {
 		int option = 0;
 		int oldSize = 0, newSize = 0;
 		done = true;
-		do
-		{
-			do
-			{
-				try
-				{
+		do {
+			do {
+				try {
 					System.out.println("\n1. Make a run.");
 					System.out.println("2.  Discard a card.");
+					System.out.print("Your input: ");
 					option = playerInput.nextInt();
-					if(option < 1 || option > 2)
-						throw new InputMismatchException("Wrong input");
+					if (option < 1 || option > 2)
+						throw new InputMismatchException();
 					done = false;
-				}
-				catch(InputMismatchException e)
-				{
-					System.out.println("Wrong Input");
+				} catch (InputMismatchException e) {
+					System.out.println("/tInvalid Input!");
 					option = 0;
 				}
 				playerInput.nextLine();
-				
-			}while(done);
-			
-			if (option == 1) 
-			{
+
+			} while (done);
+
+			if (option == 1) {
 				if (isRun(currentPlayer.hand)) {
 					oldSize = currentPlayer.laidDown.size();
 					currentPlayer.laidDown.addAll(suitRun(currentPlayer.hand));
@@ -509,15 +496,13 @@ public class Game {
 					if (heighestScore < currentPlayer.getPlayerScore())
 						heighestScore = currentPlayer.getPlayerScore();
 					displayTable();
-				}
-				else 
-				{
+				} else {
 					System.out.println("A run is not possible with cards in your hand!");
 				}
-			}			
-		}while(option != 2);
-		
-			discard(currentPlayer.hand);
+			}
+		} while (option != 2);
+
+		discard(currentPlayer.hand);
 	}
 
 	/**
@@ -532,46 +517,60 @@ public class Game {
 		int cardNumber = 0;
 		ArrayList<Card> runCards = new ArrayList<Card>();
 		done = true;
-		
+
 		do {
 			numberOfCards = 0;
 			cardNumber = 0;
 			runCards = new ArrayList<Card>();
 			int option = 0;
-			do
-			{
-				try
-				{
+			do {
+				try {
 					System.out.println("1.  Do a match run.");
 					System.out.println("2.  Do a suit run.");
+					System.out.print("Your input: ");
 					option = playerInput.nextInt();
-					if(option > 2 || option < 1)
+					if (option > 2 || option < 1)
 						throw new InputMismatchException();
 					done = false;
-				}
-				catch(InputMismatchException e)
-				{
-					System.out.println("Wrong input");
+				} catch (InputMismatchException e) {
+					System.out.println("Invalid input!");
 					option = 0;
 				}
 				playerInput.nextLine();
-			}while(done);
-			
-			do {
-				System.out.print("Please enter the number of cards you want to lay down: ");
-				numberOfCards = playerInput.nextInt();
-				if (numberOfCards < 3)
-					System.out.println("Number of cards to be laid down must be more than 2");
-			} while (numberOfCards < 3);
+			} while (done);
 
-			for (int i = 0; i < numberOfCards; i++) 
-			{
-				try
-				{
-					System.out.println("Enter card number: ");
-				cardNumber = playerInput.nextInt() - 1;
-				runCards.add(hand.get(cardNumber));
+			done = true;
+			do {
+				try {
+					System.out.print("Please enter the number of cards you want to lay down: ");
+					numberOfCards = playerInput.nextInt();
+					if (numberOfCards < 3)
+						throw new InputMismatchException();
+					done = false;
+				} catch (InputMismatchException e) {
+					System.out.println("Invalid input!");
+				}
+				playerInput.nextLine();
+			} while (done);
+
+			done = true;
+
+			for (int i = 0; i < numberOfCards; i++) {
+				do {
+					try {
+						System.out.println("Enter card number: ");
+						cardNumber = playerInput.nextInt() - 1;
+						if(cardNumber > hand.size() || cardNumber < 0)
+							throw new InputMismatchException();
+						runCards.add(hand.get(cardNumber));
+					} catch (InputMismatchException e) {
+						System.out.println("Invalid input!");
+					}
+					done = false;
+					playerInput.nextLine();
+				} while (done);
 			}
+
 			if (option == 1) {
 				checkMatchRun(runCards);
 				if (checkMatchRun(runCards)) {
@@ -597,6 +596,7 @@ public class Game {
 		} while (!checkSuitRun(runCards) || !checkMatchRun(runCards));
 
 		return runCards;
+
 	}
 
 	/**
@@ -623,10 +623,11 @@ public class Game {
 
 	/**
 	 * This function specifically checks for a Suit run.
+	 * 
 	 * @param hand The cards which are checked to see if there is a possible run.
 	 * @return True if there is a possible run, false otherwise.
 	 */
-	
+
 	public boolean checkSuitRun(ArrayList<Card> hand) {
 
 		for (int i = 0; i < hand.size() - 2; i++) {
@@ -645,9 +646,9 @@ public class Game {
 
 		// sort all the cards as per the suit and store them in specific ArrayLists
 		// and sort all the ArrayLists
-		
+
 		for (Card c : hand) {
-			if (c.getSuit() == 0) // add club cards to ArrayList 
+			if (c.getSuit() == 0) // add club cards to ArrayList
 			{
 				clubCards.add(c);
 				sortHand(clubCards);
@@ -669,7 +670,7 @@ public class Game {
 		// there is a run only if there are more than 2 cards of a certail suit
 		// so the check made to ensure that there are more than 2 cards
 		// if not skip to the next one
-		
+
 		if (clubCards.size() > 2) {
 			for (int i = 0; i < clubCards.size() - 2; i++) {
 				if ((clubCards.get(i + 1).getRank() - clubCards.get(i).getRank()) != 1
@@ -678,8 +679,7 @@ public class Game {
 			}
 		}
 
-		if (diamondCards.size() > 2) 
-		{
+		if (diamondCards.size() > 2) {
 			for (int i = 0; i < diamondCards.size() - 2; i++) {
 				if ((diamondCards.get(i + 1).getRank() - diamondCards.get(i).getRank()) != 1
 						|| (diamondCards.get(i + 2).getRank() - diamondCards.get(i).getRank()) != 2)
@@ -707,28 +707,27 @@ public class Game {
 	}
 
 	/**
-	 * This functions makes sure that the cards picked up by the player 
-	 * from the discard pile make a run. If there is no possible run
-	 * from the cards picked up from the discard pile and the cards in 
-	 * players hand than the function returns false, true otherwise. 
+	 * This functions makes sure that the cards picked up by the player from the
+	 * discard pile make a run. If there is no possible run from the cards picked up
+	 * from the discard pile and the cards in players hand than the function returns
+	 * false, true otherwise.
+	 * 
 	 * @param hand The hand of the player with chosen cards from the discard pile
 	 * @return True if the hand makes a successful run, false otherwise.
 	 */
-	
-	public boolean isRun(ArrayList<Card> hand) 
-	{
-		
-		// check for a match run 
-		
-		for (int i = 0; i < hand.size() - 2; i++) 
-		{
+
+	public boolean isRun(ArrayList<Card> hand) {
+
+		// check for a match run
+
+		for (int i = 0; i < hand.size() - 2; i++) {
 			if (hand.get(i).getRank() == hand.get(i + 1).getRank()) {
 				if (hand.get(i).getRank() == hand.get(i + 2).getRank())
 					return true;
 			}
 		}
-		
-		// check for a suit run 
+
+		// check for a suit run
 
 		ArrayList<Card> clubCards = new ArrayList<Card>();
 		ArrayList<Card> spadeCards = new ArrayList<Card>();
@@ -755,39 +754,31 @@ public class Game {
 			}
 		}
 
-		if (clubCards.size() > 2)
-		{
-			for (int i = 0; i < clubCards.size() - 2; i++) 
-			{
+		if (clubCards.size() > 2) {
+			for (int i = 0; i < clubCards.size() - 2; i++) {
 				if ((clubCards.get(i + 1).getRank() - clubCards.get(i).getRank()) == 1)
 					if ((clubCards.get(i + 2).getRank() - clubCards.get(i).getRank()) == 2)
 						return true;
 			}
 		}
-		if (diamondCards.size() > 2) 
-		{
-			for (int i = 0; i < diamondCards.size() - 2; i++) 
-			{
+		if (diamondCards.size() > 2) {
+			for (int i = 0; i < diamondCards.size() - 2; i++) {
 				if ((diamondCards.get(i + 1).getRank() - diamondCards.get(i).getRank()) == 1)
 					if ((diamondCards.get(i + 2).getRank() - diamondCards.get(i).getRank()) == 2)
 						return true;
 			}
 		}
 
-		if (heartCards.size() > 2) 
-		{
-			for (int i = 0; i < heartCards.size() - 2; i++) 
-			{
+		if (heartCards.size() > 2) {
+			for (int i = 0; i < heartCards.size() - 2; i++) {
 				if ((heartCards.get(i + 1).getRank() - heartCards.get(i).getRank()) == 1)
 					if ((heartCards.get(i + 2).getRank() - heartCards.get(i).getRank()) == 2)
 						return true;
 			}
 		}
 
-		if (spadeCards.size() > 2) 
-		{
-			for (int i = 0; i < spadeCards.size() - 2; i++) 
-			{
+		if (spadeCards.size() > 2) {
+			for (int i = 0; i < spadeCards.size() - 2; i++) {
 				if ((spadeCards.get(i + 1).getRank() - spadeCards.get(i).getRank()) == 1)
 					if ((spadeCards.get(i + 2).getRank() - spadeCards.get(i).getRank()) == 2)
 						return true;
@@ -822,9 +813,21 @@ public class Game {
 	 */
 
 	public void discard(ArrayList<Card> hand) {
+		done = true;
 		int num = 0;
-		System.out.print("Choose a card to discard: ");
-		num = playerInput.nextInt();
+		do {
+			try {
+				System.out.print("Choose a card to discard: ");
+				num = playerInput.nextInt();
+				if (num > hand.size() || num <= 0) {
+					throw new InputMismatchException();
+				}
+				done = false;
+			} catch (InputMismatchException e) {
+				System.out.println("\tInvalid input!");
+			}
+			playerInput.nextLine();
+		} while (done);
 
 		discardPile.add(hand.remove(num - 1));
 	}
@@ -836,7 +839,7 @@ public class Game {
 	 */
 
 	public void draw(ArrayList<Card> hand) {
-		System.out.println(" draw");
+		
 		hand.add(shuffledDeck.pop());
 		sortHand(hand);
 		clearConsole();
@@ -851,92 +854,66 @@ public class Game {
 
 	public void drawFromDiscard(ArrayList<Card> hand) {
 		int cardNumber = 0;
-		System.out.print("Enter the card number you want: ");
-		cardNumber = (playerInput.nextInt() - 1);
-		ArrayList<Card> tempHand = new ArrayList<Card>();
-
-		for (int i = 0; i < hand.size(); i++) {
-			tempHand.add(hand.get(i));
-		}
-
-		for (int i = cardNumber; i < discardPile.size(); i++) {
-			tempHand.add(discardPile.get(i));
-		}
-		
-		int temp = cardNumber;
-		sortHand(tempHand);
-
-		if (!isRun(tempHand)) {
-			clearConsole();
-			displayTable();
-			System.out.println("No run possible with the card chosen...");
+		if(discardPile.size() == 0)
+		{
+			System.out.print("Discard pile is empty!");
 			displayOptions();
 			return;
 		}
+		
+		done = true;
+		do {
+			try {
+				System.out.print("Enter the card number you want: ");
+				cardNumber = (playerInput.nextInt() - 1);
+				if (cardNumber > discardPile.size() || cardNumber < 0) {
+					throw new InputMismatchException();
+				}
+				ArrayList<Card> tempHand = new ArrayList<Card>();
+				done = false;
+				for (int i = 0; i < hand.size(); i++) {
+					tempHand.add(hand.get(i));
+				}
 
-		while (cardNumber != discardPile.size()) {
-			Card removeCard = discardPile.get(cardNumber);
-			hand.add(removeCard);
-			cardNumber++;
-		}
-		int pileSize = discardPile.size() - 1;
-		while (temp - 1 != pileSize) {
-			discardPile.remove(pileSize);
-			pileSize--;
-		}
+				for (int i = cardNumber; i < discardPile.size(); i++) {
+					tempHand.add(discardPile.get(i));
+				}
 
-		clearConsole();
-		displayTable();
+				int temp = cardNumber;
+				sortHand(tempHand);
 
+				if (!isRun(tempHand)) {
+					clearConsole();
+					displayTable();
+					System.out.println("No run possible with the card chosen...");
+					displayOptions();
+					return;
+				}
+
+				while (cardNumber != discardPile.size()) {
+					Card removeCard = discardPile.get(cardNumber);
+					hand.add(removeCard);
+					cardNumber++;
+				}
+				int pileSize = discardPile.size() - 1;
+				while (temp - 1 != pileSize) {
+					discardPile.remove(pileSize);
+					pileSize--;
+				}
+
+				clearConsole();
+				displayTable();
+			} catch (InputMismatchException e) {
+				System.out.println("Invalid Input!");
+			}
+			playerInput.nextLine();
+		} while (done);
 	}
-
-	
-
-	/*
-	 * public void followRun(ArrayList<Card> hand) { int playerID = 0, upperBound =
-	 * 0, lowerBound = 0, numberOfCards = 0; int cardNumber = 0; Player tempPlayer =
-	 * players.peek(); Player currentPlayer = players.peek(); ArrayList<Card>
-	 * tempHand = new ArrayList<Card>();
-	 * 
-	 * System.out.
-	 * println("The follow run lets you lay down cards on to other players' laid down piles"
-	 * ); System.out.
-	 * println("You get points for the cards that you lay onto their pile");
-	 * System.out.println("Enter the player's ID you want to follow run: ");
-	 * playerID = playerInput.nextInt()-1; for(int i = 0; i < numberOfPlayers; i++)
-	 * { if(tempPlayer.getPlayerID() == playerID) { System.out.
-	 * print("Enter the highest card number for the range your card matches with: "
-	 * ); upperBound = playerInput.nextInt()-1; System.out.
-	 * print("Enter the lowest card number for the range your card matches with: ");
-	 * lowerBound = playerInput.nextInt()-1; for(int j = lowerBound; j < upperBound;
-	 * j++) { System.out.println(tempPlayer.getPlayerID());
-	 * //tempHand.add(tempPlayer.laidDown.get(j)); }
-	 * 
-	 * System.out.print("Enter the number of cards you want to lay down: ");
-	 * numberOfCards = playerInput.nextInt();
-	 * 
-	 * for(int j = 0; j < numberOfCards; j++) {
-	 * System.out.println("Enter the card you want to lay down: "); cardNumber =
-	 * playerInput.nextInt()-1; if(cardNumber < 0 || cardNumber >
-	 * tempPlayer.hand.size() - 1) System.out.println("card isnt in hand");
-	 * tempHand.add(tempPlayer.hand.get(cardNumber)); } int temp = numberOfCards;
-	 * if(!checkMatchRun(tempHand) || !checkSuitRun(tempHand)) {
-	 * System.out.println("It is not a follow run"); } else { while(numberOfCards !=
-	 * 0) { tempPlayer.laidDown.add(tempHand.get(0));
-	 * currentPlayer.hand.remove(tempHand.get(0)); numberOfCards--;
-	 * 
-	 * } }
-	 * 
-	 * } players.add(players.poll());
-	 * 
-	 * 
-	 * } }
-	 */
 
 	/**
 	 * This function changes the turn.
 	 */
-	
+
 	public void nextTurn() {
 		clearConsole();
 		players.add(players.poll());
