@@ -47,6 +47,7 @@ public class AlignString
 	 * @param stringLength The length of the entire line
 	 * @param alignment The alignment by which the string is to be aligned.
 	 */
+	
 	public AlignString(int stringLength, String alignment)
 	{
 		switch(alignment)
