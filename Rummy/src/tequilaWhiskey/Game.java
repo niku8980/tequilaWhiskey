@@ -19,7 +19,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  ******************************************************************************/
-package rummy;
+package tequilaWhiskey;
 
 import java.util.*;
 
@@ -175,7 +175,7 @@ public class Game {
 	 */
 
 	public void welcomeScreen() {
-		System.out.print("\tWelcome to the rummy: \n");
+		System.out.print("\tWelcome to the Tequila Whiskey: \n");
 		System.out.println("\tThis game could be played by upto 4: ");
 		System.out.println("\n\tOkay! Enough of it. lets dive in setting up the game...");
 	}

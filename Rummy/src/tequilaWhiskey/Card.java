@@ -19,45 +19,93 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  ******************************************************************************/
-package rummy;
-
-import static org.junit.Assert.assertEquals;
-
-import  org.junit.*;
+package tequilaWhiskey;
 
 /**
- * This class is a test case for the Card class.
+ * This is a class for each Card in a deck
  * @author Brandon Staton, Dillon Kilroy, Nikunj Patel
  * @version 1.0
  */
 
-public class TestCard {
+public class Card {
 
 	/**
-	 * A sample test object of test class
+	 * The ranks of the cards
 	 */
 	
-	Card testCard;
+	public static final String[] RANKS = { null, " A", " 2", " 3", " 4", " 5", " 6", " 7", " 8", " 9", "10", " J", " Q", " K"}; 
+
+	/**
+	 * The suits of the cards
+	 */
+	
+	public static final String[] SUITS = { "C", "D", "H", "S" };
 	
 	/**
-	 * Initialize the object to be tested 
+	 * The rank of a card
+	 */
+		
+	int rank;
+	
+	/**
+	 * The suit of a card
 	 */
 	
-	@Before
-	public void init()
-	{
-		testCard = new Card(0,0);
+	int suit;
+	
+	/**
+	 * The constructor creates the card of a specific rank and suit. 
+	 * @param rank The rank of the card
+	 * @param suit The suit of the card
+	 */
+	
+	public Card(int rank, int suit) {
+		this.rank = rank;
+		this.suit = suit;
 	}
 	
 	/**
-	 * The test for all the functions in the Card class
+	 * It return the rank of the card
+	 * @return The rank of a card
 	 */
 	
-	@Test
-	public void test() 
-	{
-		assertEquals(testCard.getRank(), 0);
-		assertEquals(testCard.getSuit(), 0);
+	public int getRank() {
+		return rank ;
 	}
 
+	/**
+	 * This function sets the rank of a card.
+	 * @param rank A rank of a class 
+	 */
+	
+	public void setCard(int rank) {
+		this.rank = rank;
+	}
+	
+	/**
+	 * It returns the suit of a card
+	 * @return The suit of a card
+	 */
+
+	public int getSuit() {
+		return suit;
+	}
+
+	/**
+	 * This function sets the suit of a card.
+	 * @param suit The suit of the card
+	 */
+	
+	public void setSuit(char suit) {
+		this.suit = suit;
+	}
+
+	/**
+	 * Returns the textual representation of a card
+	 * @return A string of a card's rank and suit.
+	 */
+	
+	public String toString() {
+		return RANKS[this.rank] + " " + SUITS[this.suit];
+	}
 }

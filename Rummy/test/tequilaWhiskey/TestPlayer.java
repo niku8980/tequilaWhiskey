@@ -19,56 +19,50 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  ******************************************************************************/
-package rummy;
+package tequilaWhiskey;
 
 import static org.junit.Assert.*;
 import org.junit.*;
-import java.util.*;
 
-import org.junit.Test;
+import tequilaWhiskey.Player;
 
-/**
- * The test case for the Deck class
+ /**
+ * This class is a test case for the player class
  * @author Brandon Staton, Dillon Kilroy, Nikunj Patel
- * @version 1.0
- */
+ * @version 1.0 
+ * */
 
-public class TestDeck {
+
+public class TestPlayer {
 
 	/**
-	 * A sample deck to be tested
+	 * The test player to be tested
 	 */
 	
-	Deck testDeck;
+	static Player testPlayer;
 	
 	/**
-	 * The following stack holds the shuffled deck.
-	 */
-	
-	Stack<Card> testStack;
-	
-	/**
-	 * The initialization of the variables of the test case.
+	 * Initialize the object to be tested
 	 */
 	
 	@Before
-	public void init()
+	public  void init()
 	{
-		testDeck = new Deck();
-		testStack = new Stack<Card>();
-		testStack = testDeck.createDeck();
-	}
+		testPlayer = new Player();
+		testPlayer.playerID  = 1;
+		testPlayer.playerName  = "testPlayer";
+		testPlayer.playerScore  = 0;
+	} 
 	
 	/**
-	 * The test for all the functions in the deck class.
+	 * The test for all the functions in the Player class.
 	 */
 	
 	@Test
-	public void test() 
-	{
-		assertEquals(testDeck.size(), 52);
-		assertTrue(testDeck.isEmpty() == false);
-		assertTrue(testDeck.peek() == testDeck.peek());
+	public void test() {
+		assertEquals(testPlayer.getPlayerID(),1);
+		assertEquals(testPlayer.getPlayerName(), "testPlayer");
+		assertEquals(testPlayer.getPlayerScore(), 0);
 	}
 
 }

@@ -19,58 +19,32 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  ******************************************************************************/
-package rummy;
-
-import static org.junit.Assert.assertEquals;
-
-import org.junit.*;
+package tequilaWhiskey;
 
 /**
- * This class test the AlignString class and its functions.
+ * This is the main class of the program.
  * @author Brandon Staton, Dillon Kilroy, Nikunj Patel
- * @version 1.0
+ *
  */
-
-public class TestAlignString {
-
+public class Driver
+{
 	/**
-	 * Variables required for the function testing
+	 * This the main function of the program
+	 * @param args The string arguments passed when running on the command line.
 	 */
 	
-	AlignString leftPlayer;
-	AlignString centerPlayer;
-	AlignString rightPlayer;
-	AlignString rightCard;
-	AlignString centerCard;
-	AlignString leftCard;
-	String string;
+	public static void main(String[] args)
+	{
+		/**
+		 * The game.
+		 */
+		Game newGame = new Game();
 		
-	/**
-	 * This function sets up the the variables for testing
-	 */
+		/**
+		 * Play the game
+		 */
 	
-	@Before
-	public void init()
-	{
-		string = "testCase";									// string length = 8
-		leftPlayer = new AlignString(50, "LEFTPLAYER");			// the length of the entire line = 50
-		centerPlayer =  new AlignString(50, "CENTERPLAYER");
-		rightPlayer = new AlignString(50, "RIGHTPLAYER");
-		rightCard = new AlignString(50, "RIGHTCARD");
-		centerCard = new AlignString(50, "CENTERCARD");
-		leftCard = new AlignString(50, "LEFTCARD");
+		newGame.playTheGame();  
 	}
-	
-	/**
-	 * This is the function test which tests all the functions in the AlignString class.
-	 */
-	
-	@Test
-	public void test() 
-	{
-		assertEquals(centerPlayer.format(string).length(), 27);
-		assertEquals(rightPlayer.format(string).length(), 9);
-		assertEquals(rightCard.format(string).length(), 9);
-		assertEquals(centerCard.format(string).length(), 11);
-	}
+
 }

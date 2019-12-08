@@ -19,32 +19,22 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  ******************************************************************************/
-package rummy;
+package tequilaWhiskey;
+
+import org.junit.runner.RunWith;
+import org.junit.runners.Suite;
+import org.junit.runners.Suite.SuiteClasses;
 
 /**
- * This is the main class of the program.
+ * This is the test suit
  * @author Brandon Staton, Dillon Kilroy, Nikunj Patel
+ * @version 1.0
  *
  */
-public class Driver
-{
-	/**
-	 * This the main function of the program
-	 * @param args The string arguments passed when running on the command line.
-	 */
-	
-	public static void main(String[] args)
-	{
-		/**
-		 * The game.
-		 */
-		Game newGame = new Game();
-		
-		/**
-		 * Play the game
-		 */
-	
-		newGame.playTheGame();  
-	}
+@RunWith(Suite.class)
+@SuiteClasses({ TestAlignString.class, TestCard.class, TestDeck.class, TestPlayer.class })
 
+public class TestSuite 
+{
+	
 }

@@ -19,7 +19,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  ******************************************************************************/
-package rummy;
+package tequilaWhiskey;
 
 import org.junit.runner.JUnitCore;
 import org.junit.runner.Result;

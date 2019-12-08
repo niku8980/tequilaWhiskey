@@ -19,48 +19,60 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  ******************************************************************************/
-package rummy;
+package tequilaWhiskey;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+
 import org.junit.*;
 
- /**
- * This class is a test case for the player class
+import tequilaWhiskey.AlignString;
+
+/**
+ * This class test the AlignString class and its functions.
  * @author Brandon Staton, Dillon Kilroy, Nikunj Patel
- * @version 1.0 
- * */
+ * @version 1.0
+ */
 
-
-public class TestPlayer {
+public class TestAlignString {
 
 	/**
-	 * The test player to be tested
+	 * Variables required for the function testing
 	 */
 	
-	static Player testPlayer;
-	
+	AlignString leftPlayer;
+	AlignString centerPlayer;
+	AlignString rightPlayer;
+	AlignString rightCard;
+	AlignString centerCard;
+	AlignString leftCard;
+	String string;
+		
 	/**
-	 * Initialize the object to be tested
+	 * This function sets up the the variables for testing
 	 */
 	
 	@Before
-	public  void init()
+	public void init()
 	{
-		testPlayer = new Player();
-		testPlayer.playerID  = 1;
-		testPlayer.playerName  = "testPlayer";
-		testPlayer.playerScore  = 0;
-	} 
+		string = "testCase";									// string length = 8
+		leftPlayer = new AlignString(50, "LEFTPLAYER");			// the length of the entire line = 50
+		centerPlayer =  new AlignString(50, "CENTERPLAYER");
+		rightPlayer = new AlignString(50, "RIGHTPLAYER");
+		rightCard = new AlignString(50, "RIGHTCARD");
+		centerCard = new AlignString(50, "CENTERCARD");
+		leftCard = new AlignString(50, "LEFTCARD");
+	}
 	
 	/**
-	 * The test for all the functions in the Player class.
+	 * This is the function test which tests all the functions in the AlignString class.
 	 */
 	
 	@Test
-	public void test() {
-		assertEquals(testPlayer.getPlayerID(),1);
-		assertEquals(testPlayer.getPlayerName(), "testPlayer");
-		assertEquals(testPlayer.getPlayerScore(), 0);
+	public void test() 
+	{
+		assertEquals(centerPlayer.format(string).length(), 27);
+		assertEquals(rightPlayer.format(string).length(), 9);
+		assertEquals(rightCard.format(string).length(), 9);
+		assertEquals(centerCard.format(string).length(), 11);
 	}
-
 }
