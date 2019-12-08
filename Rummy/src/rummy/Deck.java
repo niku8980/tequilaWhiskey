@@ -3,12 +3,12 @@ import java.util.*;
 
 /**
  * This is a class which generates a deck for the game
- * @author Brandon Staton, Dillon Kilroy, Nick Patel
+ * @author Brandon Staton, Dillon Kilroy, Nikunj Patel
  * @version 1.0
  */
 
-public class Deck {
-	
+public class Deck 
+{
 	/**
 	 * The deck which holds all 52 cards.
 	 */
@@ -96,34 +96,4 @@ public class Deck {
 	{
 		return deck.size();
 	}
-	
-//	/**
-//	 * returns
-//	 */
-//	
-//	/*public String toString() {
-//		String s = new String();
-//		int k = 0;
-//
-//		for (int i = 0; i < 4; i++) {
-//			for (int j = 1; j <= 13; j++) {
-//				s += (deck.get(k++) + " ");
-//				s += "\n";
-//			}
-//			s += "\n";
-//		}
-//		return (s);
-//	}
-//	
-//	/**
-//	 * This function prints out all the cards in the deck.
-//	 */
-//	/*
-//	public void printDeck()
-//	{
-//		for(Card c: deck)
-//		{
-//			System.out.print(c.toString() + " ");
-//		}
-//	}*/*/
 }

@@ -47,11 +47,9 @@ public class TestAlignString {
 	@Test
 	public void test() 
 	{
-		assertEquals(leftPlayer.format(string).length(), 51);
 		assertEquals(centerPlayer.format(string).length(), 27);
 		assertEquals(rightPlayer.format(string).length(), 9);
 		assertEquals(rightCard.format(string).length(), 9);
-		assertEquals(leftCard.format(string).length(), 10);
 		assertEquals(centerCard.format(string).length(), 11);
 	}
 }

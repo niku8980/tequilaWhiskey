@@ -2,11 +2,11 @@ package rummy;
 
 /**
  * This is the main class of the program.
- * @author Brandon Staton, Dillon Kilroy, Nick Patel
+ * @author Brandon Staton, Dillon Kilroy, Nikunj Patel
  *
  */
-public class Driver {
-
+public class Driver
+{
 	/**
 	 * This the main function of the program
 	 * @param args The string arguments passed when running on the command line.
@@ -23,7 +23,7 @@ public class Driver {
 		 * Play the game
 		 */
 	
-		newGame.setUpGame();  
+		newGame.playTheGame();  
 	}
 
 }

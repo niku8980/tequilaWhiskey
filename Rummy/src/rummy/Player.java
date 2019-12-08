@@ -1,10 +1,12 @@
 package rummy;
 import java.util.*;
+
 /**
  * This is the player class which resembles a player in the game 
  * @author Brandon Staton, Dillon Kilroy, Nikunj Patel
  * @version 1.0 *
  */
+
 public class Player
 {
 	/**
@@ -72,7 +74,7 @@ public class Player
 	
 	/**
 	 * This function returns the current score of the player
-	 * @return The currente score of the player
+	 * @return The current score of the player
 	 */
 
 	public int getPlayerScore() 
@@ -109,16 +111,4 @@ public class Player
 	{
 		this.playerName = playerName;
 	}	
-	
-	/**
-	 * This function prints the player's information
-	 * @param playerID ID number of the player whose information is to be printed.
-	 */
-	
-	public void printPlayerInfo(int playerID)
-	{
-		System.out.println("\tPlayer ID: " + (this.playerID + 1));
-		System.out.println("\tPlayer Name: " + this.playerName);
-		System.out.println("\tPlater Score: " + this.playerScore);
-	}
 }

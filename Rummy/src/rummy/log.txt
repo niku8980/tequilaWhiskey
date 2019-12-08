@@ -1,6 +1,2 @@
-	Welcome to the rummy: 
-	This game could be played by upto 4: 
-
-	Okay! Enough of it. lets dive in setting up the game...
-
-	Can you please enter number of players 2 - 4: 
+Error: Could not find or load main class rummy.Driver
+Caused by: java.lang.ClassNotFoundException: rummy.Driver

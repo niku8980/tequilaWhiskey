@@ -1,11 +1,10 @@
 package rummy;
 
 /**
- * This is a class to align strings in center, left and right
- * @author Brandon Staton, Dillon Kilroy, Nick Patel
+ * This is a class to align strings in center and right
+ * @author Brandon Staton, Dillon Kilroy, Nikunj Patel
  * @version 1.0
  */
-
 
 public class AlignString 
 {
@@ -13,11 +12,13 @@ public class AlignString
 	/**
 	 * What alignment is to be used to align the string 
 	 */
+	
 	private String alignment;
 	
 	/**
 	 * The length of the entire line
 	 */
+	
 	private int stringLength;
 	
 	/**
@@ -40,7 +41,7 @@ public class AlignString
 	} 
 	
 	/**
-	 * This function formats the string according to the alignment
+	 * This function formats the string according to the alignment chosen
 	 * @param input The string which is to be aligned
 	 * @return The aligned string
 	 */

@@ -1,8 +1,8 @@
 package rummy;
 
 /**
- * This is a class for a Card in a deck
- * @author Brandon Staton, Dillon Kilroy, Nick Patel
+ * This is a class for each Card in a deck
+ * @author Brandon Staton, Dillon Kilroy, Nikunj Patel
  * @version 1.0
  */
 
@@ -15,7 +15,7 @@ public class Card {
 	public static final String[] RANKS = { null, " A", " 2", " 3", " 4", " 5", " 6", " 7", " 8", " 9", "10", " J", " Q", " K"}; 
 
 	/**
-	 * The suites of the cards
+	 * The suits of the cards
 	 */
 	
 	public static final String[] SUITS = { "C", "D", "H", "S" };
