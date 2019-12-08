@@ -113,6 +113,17 @@ public class Game {
 
 	}
 
+	/**
+	 * This function is in charge of the game play.
+	 * 
+	 * This function prints out the welcome screen, 
+	 * gets the information from the players,
+	 * sets up players' profiles, and 
+	 * distributes cards.
+	 * 
+	 * The game runs until the score cap is met.
+	 */
+	
 	void playTheGame() // playGame()
 	{
 		welcomeScreen();
@@ -125,15 +136,17 @@ public class Game {
 			displayOptions();
 			displayTurn();
 			nextTurn();
-			clearConsole();
-
-			
+			if(highestScore < scoreCap)
+				clearConsole();
 		}
 
-		System.out.println("=====================================================================================================================");
-		System.out.println("Heighest score: " + highestScore);
-//		System.out.println("Score cap: " + scoreCap);		
-		System.out.println("The game has ended and " + highestName + " has won!!");
+		System.out.println();
+		System.out.println("*********************************************************************************************************************");
+		System.out.println("*********************************************************************************************************************");
+		System.out.println("\nHeighest score: " + highestScore);
+		System.out.println("The game has ended and " + highestName + " has won!!\n");
+		System.out.println("*********************************************************************************************************************");
+		System.out.println("*********************************************************************************************************************");
 	}
 
 	/**
@@ -285,6 +298,7 @@ public class Game {
 	 * 
 	 * @param p The player whose information is to be printed.
 	 */
+	
 	public void printPlayerInfoCenter(Player p) 
 	{
 		int playerID = p.getPlayerID() + 1;
@@ -926,7 +940,6 @@ public class Game {
 
 	public void draw(ArrayList<Card> hand) 
 	{
-		System.out.println(" draw");
 		hand.add(shuffledDeck.pop());
 		sortHand(hand);
 		clearConsole();
@@ -1006,7 +1019,8 @@ public class Game {
 
 	public void nextTurn()
 	{
-		clearConsole();
+		if(highestScore < scoreCap)
+			clearConsole();
 		players.add(players.poll());
 		if (players.peek().hand.isEmpty())
 		{
